@@ -1,0 +1,41 @@
+# ================================================================
+# 📄 _data/publications.yml
+# Add each publication as a new item below.
+# Copy the block and fill in your details.
+# ================================================================
+
+- year: "2026"
+  type: "Journal Article"
+  venue: "Journal of Constructional Steel Research"
+  title: "Behaviour of plywood-sheathed cold-formed steel shear walls under monotonic and cyclic in-plane shear loading"
+  authors: "<strong>Panchamoorthy, K. S.</strong> and Madhavan, M. M."
+  details: "Vol. 238, March 2026. ISSN: 0143974X"
+  doi_url: "https://doi.org/10.1016/j.jcsr.2025.110172"
+  doi_label: "DOI: 10.1016/j.jcsr.2025.110172"
+  extra_url: ""
+  extra_label: ""
+
+- year: "2025"
+  type: "Journal Article"
+  venue: "Journal of Structural Engineering (ASCE)"
+  title: "Experimental Study of Screw Connections in Plywood-Sheathed CFS Wall Panels Subjected to In-Plane Shear Loading"
+  authors: "<strong>Panchamoorthy, K. S.</strong> and Madhavan, M. M."
+  details: "Vol. 151, No. 5, May 2025. ISSN: 0733-9445"
+  doi_url: "https://ascelibrary.org/doi/10.1061/JSENDH.STENG-14106"
+  doi_label: "DOI: 10.1061/JSENDH.STENG-14106"
+  extra_url: "https://ascelibrary.org/doi/10.1061/JSENDH.STENG-14106"
+  extra_label: "ASCE Library"
+
+# ── HOW TO ADD A NEW PUBLICATION ────────────────────────────────
+# Copy the block below, uncomment it, and fill in your details:
+#
+# - year: "2027"
+#   type: "Conference Paper"
+#   venue: "Name of Journal or Conference"
+#   title: "Your paper title here"
+#   authors: "<strong>Your Name</strong> and Co-Author"
+#   details: "Vol. X, No. Y, Month Year."
+#   doi_url: "https://doi.org/your-doi"
+#   doi_label: "DOI: your-doi"
+#   extra_url: ""
+#   extra_label: ""

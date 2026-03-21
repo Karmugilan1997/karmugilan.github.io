@@ -1,0 +1,49 @@
+# ================================================================
+# 🔧 _config.yml — EDIT ALL YOUR DETAILS HERE
+# This file controls your entire website content.
+# After editing: save → git add . → git commit -m "update" → git push
+# ================================================================
+
+# ── BASIC INFO ──────────────────────────────────────────────────
+title: "Karmugilan Panchamoorthy"
+tagline: "Cold-Formed Steel Structures & Experimental Mechanics"
+description: "PhD Research Scholar in Structural Engineering, IIT Hyderabad"
+url: "https://karmugilan1997.github.io"
+baseurl: ""
+
+# ── AUTHOR DETAILS ──────────────────────────────────────────────
+author:
+  name: "Karmugilan Panchamoorthy"
+  initials: "Karmugilan"
+  photo: "images/profile.JPG"      # upload your photo to images/ folder and rename it profile.jpg
+  role: "PhD Research Scholar · Structural Engineering"
+  department: "Dept. of Civil Engineering"
+  institution: "Indian Institute of Technology Hyderabad"
+  location: "IIT Hyderabad, Telangana – 502284"
+  supervisor: "Prof. Mahendrakumar Madhavan"
+  cgpa: "9.75 / 10"
+  phone: "+91-8098336845"
+  email: "ce21resch11010@iith.ac.in"
+
+  # ── SOCIAL LINKS (paste your actual URLs) ──
+  linkedin: "https://linkedin.com/in/your-id"         # ✏️ replace
+  googlescholar: "https://scholar.google.com/your-id" # ✏️ replace
+  github: "https://github.com/Karmugilan1997"
+  researchgate: "https://researchgate.net/your-id"    # ✏️ replace
+
+  # ── BIO (shown on homepage) ──
+  bio: >
+    Research scholar at IIT Hyderabad specialising in the behaviour of
+    <strong>cold-formed steel (CFS) shear wall systems</strong> under in-plane
+    seismic loading. My work bridges large-scale experimental testing, finite
+    element modelling in Abaqus, and full-field strain measurement using
+    <strong>3D Digital Image Correlation (DIC)</strong>.
+
+# ── CV FILE ─────────────────────────────────────────────────────
+cv_file: "files/Karmugilan_CV.pdf"   # upload your CV to files/ folder
+
+# ── JEKYLL SETTINGS (don't change these) ────────────────────────
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed

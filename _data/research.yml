@@ -1,0 +1,27 @@
+# ================================================================
+# 🔬 _data/research.yml — Edit your research interest cards
+# ================================================================
+
+- icon: "🏗️"
+  title: "Steel Structures & Connections"
+  desc: "Behaviour and design of steel structural members, connections, and systems under static and cyclic loading."
+
+- icon: "🌀"
+  title: "CFS Shear Wall Systems"
+  desc: "Cold-formed steel shear walls under seismic and cyclic in-plane loading — from screw connections to full-scale wall performance."
+
+- icon: "💻"
+  title: "Finite Element Analysis"
+  desc: "Nonlinear FEM simulations using Abaqus, including material and geometric nonlinearity, validated against experimental data."
+
+- icon: "📷"
+  title: "3D Digital Image Correlation"
+  desc: "Full-field deformation and strain measurement using 3D-DIC for experimental–numerical integration in structural assessment."
+
+- icon: "♻️"
+  title: "Sustainable Structural Systems"
+  desc: "Exploring sustainable and resilient construction practices using innovative thin-walled cold-formed steel systems."
+
+- icon: "🧪"
+  title: "Experimental Mechanics"
+  desc: "Large-scale structural testing using quasi-static and cyclic loading protocols for seismic performance evaluation."

@@ -1,0 +1,330 @@
+---
+layout: null
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{ site.author.name }} — Research Scholar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #f5f2eb; --surface: #edeae0; --ink: #1a1a18;
+      --muted: #6b6860; --accent: #c0392b; --accent2: #2c5f8a;
+      --border: #d4d0c4; --tag-bg: #e0ddd3;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Lora', Georgia, serif; background: var(--bg); color: var(--ink); line-height: 1.75; font-size: 17px; }
+
+    /* ── NAV ── */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: var(--bg); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 2.5rem; height: 56px; }
+    .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem; letter-spacing: 0.05em; color: var(--ink); text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: 80px 5rem 4rem; gap: 4rem; }
+    .hero-text { max-width: 520px; }
+    .hero-label { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem; }
+    .hero-label::before { content: ''; display: block; width: 2rem; height: 1px; background: var(--accent); }
+    h1 { font-family: 'Syne', sans-serif; font-size: clamp(2.2rem, 4.5vw, 3.4rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 0.4rem; }
+    .hero-role { font-family: 'Lora', serif; font-style: italic; font-size: 1.1rem; color: var(--muted); margin-bottom: 1.6rem; }
+    .hero-bio { font-size: 0.97rem; color: var(--ink); line-height: 1.85; margin-bottom: 2rem; border-left: 3px solid var(--accent); padding-left: 1.2rem; }
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn { font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.65rem 1.4rem; border-radius: 2px; cursor: pointer; text-decoration: none; transition: all 0.2s; display: inline-block; }
+    .btn-primary { background: var(--accent); color: #fff; border: 1px solid var(--accent); }
+    .btn-primary:hover { background: #a93226; }
+    .btn-outline { background: transparent; color: var(--ink); border: 1px solid var(--border); }
+    .btn-outline:hover { border-color: var(--ink); }
+
+    /* ── PROFILE CARD ── */
+    .hero-card { background: var(--surface); border: 1px solid var(--border); padding: 2.5rem; max-width: 340px; margin-left: auto; }
+    .avatar-wrapper { width: 100px; height: 100px; border-radius: 50%; overflow: hidden; margin-bottom: 1.5rem; border: 3px solid var(--border); }
+    .avatar-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+    .avatar-placeholder { width: 100%; height: 100%; background: linear-gradient(135deg, var(--accent2), var(--accent)); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-size: 2rem; color: #fff; font-weight: 800; }
+    .card-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 0.2rem; }
+    .card-dept { font-size: 0.82rem; color: var(--muted); margin-bottom: 1.5rem; line-height: 1.5; }
+    .card-info-row { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.82rem; margin-bottom: 0.6rem; color: var(--muted); }
+    .card-info-row .icon { font-size: 0.9rem; margin-top: 0.05rem; flex-shrink: 0; }
+    .card-divider { border: none; border-top: 1px solid var(--border); margin: 1.2rem 0; }
+    .social-links { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+    .social-btn { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.08em; padding: 0.35rem 0.7rem; background: var(--tag-bg); color: var(--ink); border: 1px solid var(--border); text-decoration: none; border-radius: 2px; transition: all 0.2s; }
+    .social-btn:hover { background: var(--ink); color: var(--bg); }
+
+    /* ── SECTIONS ── */
+    section { padding: 5rem 5rem; }
+    section + section { border-top: 1px solid var(--border); }
+    .section-header { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 3rem; }
+    .section-num { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--accent); letter-spacing: 0.1em; }
+    h2 { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 700; letter-spacing: -0.02em; }
+
+    /* ── RESEARCH ── */
+    .interests-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; }
+    .interest-card { padding: 1.5rem; background: var(--surface); border: 1px solid var(--border); border-top: 3px solid var(--accent2); }
+    .interest-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+    .interest-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.92rem; margin-bottom: 0.4rem; }
+    .interest-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
+
+    /* ── PUBLICATIONS ── */
+    .pub-list { display: flex; flex-direction: column; gap: 1.5rem; }
+    .pub-item { padding: 1.5rem 1.75rem; background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--accent); transition: border-color 0.2s; }
+    .pub-item:hover { border-left-color: var(--accent2); }
+    .pub-meta { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+    .pub-badge { background: var(--tag-bg); padding: 0.1rem 0.5rem; border-radius: 2px; font-size: 0.65rem; color: var(--accent); border: 1px solid currentColor; }
+    .pub-title { font-family: 'Lora', serif; font-weight: 600; font-size: 1rem; margin-bottom: 0.4rem; line-height: 1.5; }
+    .pub-authors { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.4rem; }
+    .pub-venue { font-size: 0.82rem; font-style: italic; color: var(--muted); margin-bottom: 0.75rem; }
+    .pub-links { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+    .pub-link { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.05em; color: var(--accent2); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+    .pub-link:hover { border-color: var(--accent2); }
+
+    /* ── SKILLS ── */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+    .skill-group { background: var(--surface); border: 1px solid var(--border); padding: 1.5rem; }
+    .skill-group-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .skill-tag { font-family: 'DM Mono', monospace; font-size: 0.7rem; background: var(--tag-bg); color: var(--ink); padding: 0.3rem 0.7rem; border-radius: 2px; border: 1px solid var(--border); }
+
+    /* ── EDUCATION TIMELINE ── */
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--border); }
+    .timeline-item { position: relative; margin-bottom: 2.2rem; }
+    .timeline-item::before { content: ''; position: absolute; left: -2.4rem; top: 0.45rem; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); box-shadow: 0 0 0 1px var(--accent); }
+    .timeline-year { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.25rem; }
+    .timeline-role { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 0.15rem; }
+    .timeline-place { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.4rem; }
+    .timeline-cgpa { display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--accent2); border: 1px solid var(--accent2); padding: 0.1rem 0.5rem; border-radius: 2px; margin-bottom: 0.5rem; }
+    .timeline-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+
+    /* ── CONTACT ── */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .contact-text { font-size: 1rem; color: var(--muted); line-height: 1.85; margin-bottom: 2rem; }
+    .contact-items { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-item { display: flex; align-items: center; gap: 1rem; padding: 0.9rem 1.25rem; background: var(--surface); border: 1px solid var(--border); }
+    .contact-item .icon { font-size: 1.1rem; }
+    .contact-item-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.15rem; }
+    .contact-item-value { font-size: 0.88rem; color: var(--ink); }
+    .contact-item-value a { color: var(--accent2); text-decoration: none; }
+    .contact-item-value a:hover { text-decoration: underline; }
+    .location-card { background: var(--surface); border: 1px solid var(--border); padding: 2rem; text-align: center; }
+    .location-map-emoji { font-size: 3.5rem; margin-bottom: 1rem; display: block; }
+    .location-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 0.3rem; }
+    .location-sub { font-size: 0.82rem; color: var(--muted); line-height: 1.7; }
+
+    /* ── FOOTER ── */
+    footer { padding: 2rem 5rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted); }
+
+    /* ── ANIMATIONS ── */
+    .fade-in { opacity: 0; transform: translateY(20px); animation: fadeUp 0.6s ease forwards; }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    .d1{animation-delay:.1s} .d2{animation-delay:.2s} .d3{animation-delay:.3s} .d4{animation-delay:.4s} .d5{animation-delay:.5s}
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; padding: 80px 2rem 3rem; }
+      .hero-card { margin: 0; max-width: 100%; }
+      section { padding: 3rem 2rem; }
+      .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+      nav { padding: 0 1.5rem; }
+      .nav-links { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">{{ site.author.initials }}.</a>
+  <ul class="nav-links">
+    <li><a href="#research">Research</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-text">
+    <p class="hero-label fade-in">{{ site.author.role }}</p>
+    <h1 class="fade-in d1">{{ site.author.name | split: " " | first }}<br/>{{ site.author.name | split: " " | last }}</h1>
+    <p class="hero-role fade-in d2">{{ site.tagline }}</p>
+    <p class="hero-bio fade-in d3">{{ site.author.bio }}</p>
+    <div class="hero-ctas fade-in d4">
+      <a href="#publications" class="btn btn-primary">View Publications</a>
+      <a href="{{ site.cv_file }}" class="btn btn-outline" target="_blank">Download CV</a>
+    </div>
+  </div>
+
+  <div class="hero-card fade-in d5">
+    <div class="avatar-wrapper">
+      {% if site.author.photo %}
+        <img src="{{ site.author.photo }}" alt="{{ site.author.name }}" onerror="this.parentElement.innerHTML='<div class=\'avatar-placeholder\'>{{ site.author.initials }}</div>'">
+      {% else %}
+        <div class="avatar-placeholder">{{ site.author.initials }}</div>
+      {% endif %}
+    </div>
+    <div class="card-name">{{ site.author.name }}</div>
+    <div class="card-dept">{{ site.author.department }}<br/>{{ site.author.institution }}</div>
+    <div class="card-info-row"><span class="icon">🏛️</span><span>{{ site.author.location }}</span></div>
+    <div class="card-info-row"><span class="icon">🔬</span><span>Supervisor: {{ site.author.supervisor }}</span></div>
+    <div class="card-info-row"><span class="icon">🎓</span><span>CGPA: {{ site.author.cgpa }}</span></div>
+    <div class="card-info-row"><span class="icon">📞</span><span>{{ site.author.phone }}</span></div>
+    <hr class="card-divider"/>
+    <div class="social-links">
+      <a href="mailto:{{ site.author.email }}" class="social-btn">Email</a>
+      {% if site.author.linkedin %}<a href="{{ site.author.linkedin }}" class="social-btn" target="_blank">LinkedIn</a>{% endif %}
+      {% if site.author.googlescholar %}<a href="{{ site.author.googlescholar }}" class="social-btn" target="_blank">Scholar</a>{% endif %}
+      {% if site.author.researchgate %}<a href="{{ site.author.researchgate }}" class="social-btn" target="_blank">ResearchGate</a>{% endif %}
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH INTERESTS -->
+<section id="research">
+  <div class="section-header">
+    <span class="section-num">01 —</span>
+    <h2>Research Interests</h2>
+  </div>
+  <div class="interests-grid">
+    {% for item in site.data.research %}
+    <div class="interest-card">
+      <div class="interest-icon">{{ item.icon }}</div>
+      <div class="interest-title">{{ item.title }}</div>
+      <div class="interest-desc">{{ item.desc }}</div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <div class="section-header">
+    <span class="section-num">02 —</span>
+    <h2>Publications</h2>
+  </div>
+  <div class="pub-list">
+    {% for pub in site.data.publications %}
+    <div class="pub-item">
+      <div class="pub-meta">
+        <span>{{ pub.year }}</span>
+        <span class="pub-badge">{{ pub.type }}</span>
+        <span>{{ pub.venue }}</span>
+      </div>
+      <div class="pub-title">{{ pub.title }}</div>
+      <div class="pub-authors">{{ pub.authors }}</div>
+      <div class="pub-venue">{{ pub.details }}</div>
+      <div class="pub-links">
+        {% if pub.doi_url %}<a href="{{ pub.doi_url }}" class="pub-link" target="_blank">[{{ pub.doi_label }}]</a>{% endif %}
+        {% if pub.extra_url %}<a href="{{ pub.extra_url }}" class="pub-link" target="_blank">[{{ pub.extra_label }}]</a>{% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">
+    <span class="section-num">03 —</span>
+    <h2>Core Skills</h2>
+  </div>
+  <div class="skills-grid">
+    {% for group in site.data.skills %}
+    <div class="skill-group">
+      <div class="skill-group-title"><span>{{ group.icon }}</span> {{ group.group }}</div>
+      <div class="skill-tags">
+        {% for tag in group.tags %}
+        <span class="skill-tag">{{ tag }}</span>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header">
+    <span class="section-num">04 —</span>
+    <h2>Education & Experience</h2>
+  </div>
+  <div class="timeline">
+    {% for edu in site.data.education %}
+    <div class="timeline-item">
+      <div class="timeline-year">{{ edu.year }}</div>
+      <div class="timeline-role">{{ edu.role }}</div>
+      <div class="timeline-place">{{ edu.place }}</div>
+      <div class="timeline-cgpa">{{ edu.cgpa }}</div>
+      <div class="timeline-desc">{{ edu.desc }}</div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <span class="section-num">05 —</span>
+    <h2>Get in Touch</h2>
+  </div>
+  <div class="contact-grid">
+    <div>
+      <p class="contact-text">
+        I'm open to research collaborations, paper discussions, and conversations
+        around cold-formed steel structures, experimental mechanics, and seismic
+        engineering. Feel free to reach out — I typically respond within 48 hours.
+      </p>
+      <div class="contact-items">
+        <div class="contact-item">
+          <span class="icon">✉️</span>
+          <div>
+            <div class="contact-item-label">Institutional Email</div>
+            <div class="contact-item-value"><a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span class="icon">📞</span>
+          <div>
+            <div class="contact-item-label">Phone</div>
+            <div class="contact-item-value">{{ site.author.phone }}</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span class="icon">🏛️</span>
+          <div>
+            <div class="contact-item-label">Institution</div>
+            <div class="contact-item-value">{{ site.author.department }}, {{ site.author.location }}</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span class="icon">🔬</span>
+          <div>
+            <div class="contact-item-label">Supervisor</div>
+            <div class="contact-item-value">{{ site.author.supervisor }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="location-card">
+      <span class="location-map-emoji">🗺️</span>
+      <div class="location-name">{{ site.author.institution }}</div>
+      <div class="location-sub">Kandi, Sangareddy District<br/>Telangana, India – 502284</div>
+      <br/>
+      <a href="https://www.iith.ac.in" class="btn btn-outline" target="_blank">Visit IITH Website</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© {% assign y = site.time | date: "%Y" %}{{ y }} {{ site.author.name }}</span>
+  <span>Built with Jekyll · Hosted on GitHub Pages</span>
+</footer>
+
+</body>
+</html>

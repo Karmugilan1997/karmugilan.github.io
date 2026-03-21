@@ -1,0 +1,25 @@
+# ================================================================
+# 🎓 _data/education.yml — Edit your education & experience
+# ================================================================
+
+- year: "2021 — Present"
+  role: "PhD Research Scholar — Structural Engineering"
+  place: "Indian Institute of Technology Hyderabad, India"
+  cgpa: "CGPA: 9.75 / 10"
+  desc: >
+    Thesis: Behaviour of cold-formed steel shear wall systems under in-plane
+    cyclic shear loading. Supervised by Prof. Mahendrakumar Madhavan.
+    Conducted large-scale experimental testing, 3D-DIC full-field measurements,
+    and Abaqus FEM simulation. Authored peer-reviewed publications in Q1 journals.
+
+- year: "2019 — 2021"
+  role: "M.E. — Structural Engineering"
+  place: "ACGCET – Karaikudi, Tamil Nadu, India"
+  cgpa: "CGPA: 9.71 / 10"
+  desc: "Master of Engineering in Structural Engineering with distinction."
+
+- year: "2015 — 2019"
+  role: "B.E. — Civil Engineering"
+  place: "Government College of Engineering, Thanjavur (Anna University), India"
+  cgpa: "CGPA: 8.44 / 10"
+  desc: "Bachelor of Engineering in Civil Engineering with First Class Distinction."
