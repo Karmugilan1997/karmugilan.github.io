@@ -1,34 +1,27 @@
 # ================================================================
 # 🔬 _data/research.yml
-# ✏️ Edit research interest cards
 # ================================================================
 
 - icon: "🏗️"
   title: "Steel Structures & Connections"
   desc: "Behaviour and design of steel structural members, connections, and systems under static and cyclic loading."
-  color: "blue"
 
 - icon: "🌀"
   title: "CFS Shear Wall Systems"
   desc: "Cold-formed steel shear walls under seismic and cyclic in-plane loading — from screw connections to full-scale wall performance."
-  color: "red"
 
 - icon: "💻"
-  title: "Finite Element Analysis"
-  desc: "Nonlinear FEM simulations using Abaqus, including material and geometric nonlinearity, validated against experimental data."
-  color: "blue"
+  title: "Nonlinear FEM (Abaqus)"
+  desc: "Nonlinear FEM simulations including material and geometric nonlinearity, mesh sensitivity, and model validation."
 
 - icon: "📷"
   title: "3D Digital Image Correlation"
-  desc: "Full-field deformation and strain measurement using 3D-DIC for experimental–numerical integration in structural assessment."
-  color: "red"
+  desc: "Full-field strain and deformation measurement using 3D-DIC, enabling failure mechanism identification beyond conventional instrumentation."
+
+- icon: "🔗"
+  title: "Experimental–Numerical Integration"
+  desc: "Integrating experimental and numerical datasets for comprehensive evaluation of shear strength, ductility, and energy dissipation."
 
 - icon: "♻️"
-  title: "Sustainable Structural Systems"
-  desc: "Exploring sustainable and resilient construction using innovative thin-walled and cold-formed steel systems."
-  color: "blue"
-
-- icon: "🧪"
-  title: "Experimental Mechanics"
-  desc: "Large-scale structural testing using quasi-static and cyclic loading protocols for seismic performance evaluation."
-  color: "red"
+  title: "Sustainable & Resilient Systems"
+  desc: "Seismically resilient steel structural systems and sustainable construction practices using cold-formed steel."
