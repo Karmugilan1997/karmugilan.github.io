@@ -1,48 +1,47 @@
 # ================================================================
-# 🔧 _config.yml — EDIT ALL YOUR DETAILS HERE
-# This file controls your entire website content.
-# After editing: save → git add . → git commit -m "update" → git push
+# ✏️ _config.yml — EDIT YOUR DETAILS HERE
+# git add . && git commit -m "update" && git push
 # ================================================================
 
-# ── BASIC INFO ──────────────────────────────────────────────────
 title: "Karmugilan Panchamoorthy"
-tagline: "Cold-Formed Steel Structures & Seismic design of Steel Structures"
-description: "PhD Research Scholar in Structural Engineering, IIT Hyderabad"
+tagline: "Structural Engineering · Cold-Formed Steel · Experimental Mechanics"
+description: "PhD Candidate | Structural Engineering | IIT Hyderabad"
 url: "https://karmugilan1997.github.io"
 baseurl: ""
 
-# ── AUTHOR DETAILS ──────────────────────────────────────────────
 author:
   name: "Karmugilan Panchamoorthy"
-  initials: "Karmugilan"
-  photo: "images/Photo_500kb.jpeg"       # upload your photo to images/ folder and rename it profile.jpg
-  role: "Research Scholar · Structural Engineering"
-  department: "Dept. of Civil Engineering"
+  initials: "KP"
+  photo: "images/profile.JPG"
+  role: "PhD Candidate – Structural Engineering"
+  department: "Department of Civil Engineering"
   institution: "Indian Institute of Technology Hyderabad"
-  location: "IIT Hyderabad, Telangana – 502284"
+  location: "IIT Hyderabad, India – 502284"
   supervisor: "Prof. Mahendrakumar Madhavan"
-  
-  phone: "+91-"
+  cgpa: "9.75 / 10"
+  phone: "+91-8098336845"
   email: "ce21resch11010@iith.ac.in"
+  orcid: "0009-0000-4948-1288"
 
-  # ── SOCIAL LINKS (paste your actual URLs) ──
-  linkedin: "https://www.linkedin.com/feed/?trk=eml-email_accept_invite_single_01-header-6-home"         # ✏️ replace
-  googlescholar: "https://scholar.google.com/citations?user=X2T3ayQAAAAJ&hl=en" # ✏️ replace
+  linkedin: "https://www.linkedin.com/feed/?trk=em1-email_accept_invite_single_01-header-6-home"
+  googlescholar: "https://scholar.google.com/citations?user=X2T3ayQAAAAJ&hl=en"
   github: "https://github.com/Karmugilan1997"
-  researchgate: "https://www.researchgate.net/profile/Karmugilan-Panchamoorthy/research"    # ✏️ replace
+  researchgate: "https://www.researchgate.net/profile/Karmugilan-Panchamoorthy/research"
 
-  # ── BIO (shown on homepage) ──
-  bio: >
-    Research scholar at IIT Hyderabad specialising in the behaviour of
-    <strong>cold-formed steel (CFS) shear wall systems</strong> under in-plane
-    seismic loading. My work bridges large-scale experimental testing, finite
-    element modelling in Abaqus, and full-field strain measurement using
-    <strong>3D Digital Image Correlation (DIC)</strong>.
+  bio: "PhD Candidate in Structural Engineering at IIT Hyderabad, specialising in cold-formed steel (CFS) shear wall systems under in-plane seismic loading. Research spans large-scale experimental testing, Abaqus FEM simulation, and 3D Digital Image Correlation (DIC). Supervised by Prof. Mahendrakumar Madhavan."
 
-# ── CV FILE ─────────────────────────────────────────────────────
-cv_file: "files/Karmugilan_CV.pdf"   # upload your CV to files/ folder
+cv_file: "files/Karmugilan_CV-21062026.pdf"
 
-# ── JEKYLL SETTINGS (don't change these) ────────────────────────
+stats:
+  - number: "3"
+    label: "Journal Papers"
+  - number: "1"
+    label: "Conference Paper"
+  - number: "9.75"
+    label: "PhD CGPA"
+  - number: "4+"
+    label: "Years Research"
+
 markdown: kramdown
 theme: minima
 plugins:
