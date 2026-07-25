@@ -1,40 +1,27 @@
 # ================================================================
-# 🛠️ _data/skills.yml
+# 🔬 _data/research.yml
 # ================================================================
 
-- group: "Experimental"
-  icon: "🔩"
-  tags:
-    - "Large-Scale Structural Testing"
-    - "Quasi-Static Cyclic Loading"
-    - "3D DIC Setup & Post-Processing"
-    - "LVDTs & Load Cells"
-    - "Strain Gauges"
-    - "Data Acquisition Systems"
+- icon: "🏗️"
+  title: "Steel Structures & Connections"
+  desc: "Behaviour and design of steel structural members, connections, and systems under static and cyclic loading."
 
-- group: "Numerical & Computational"
-  icon: "⚙️"
-  tags:
-    - "Abaqus FEM"
-    - "Nonlinear Material Modelling"
-    - "Geometric Nonlinearity"
-    - "Mesh Sensitivity Studies"
-    - "Model Validation"
-    - "Parametric Studies"
+- icon: "🌀"
+  title: "CFS Shear Wall Systems"
+  desc: "Cold-formed steel shear walls under seismic and cyclic in-plane loading — from screw connections to full-scale wall performance."
 
-- group: "Programming & Software"
-  icon: "💻"
-  tags:
-    - "Python"
-    - "STAAD.Pro"
-    - "LaTeX"
-    - "MS Office"
+- icon: "💻"
+  title: "Nonlinear FEM (Abaqus)"
+  desc: "Nonlinear FEM simulations including material and geometric nonlinearity, mesh sensitivity, and model validation."
 
-- group: "Design Codes"
-  icon: "📐"
-  tags:
-    - "AISC"
-    - "Eurocode"
-    - "IS Codes"
-    - "AISI S400"
-    - "AS/NZS 4600"
+- icon: "📷"
+  title: "3D Digital Image Correlation"
+  desc: "Full-field strain and deformation measurement using 3D-DIC, enabling failure mechanism identification beyond conventional instrumentation."
+
+- icon: "🔗"
+  title: "Experimental–Numerical Integration"
+  desc: "Integrating experimental and numerical datasets for comprehensive evaluation of shear strength, ductility, and energy dissipation."
+
+- icon: "♻️"
+  title: "Sustainable & Resilient Systems"
+  desc: "Seismically resilient steel structural systems and sustainable construction practices using cold-formed steel."
