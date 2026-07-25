@@ -10,679 +10,776 @@ layout: null
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <style>
     :root {
+      --bg: #050d1a;
       --navy: #0a192f;
-      --navy2: #112240;
-      --navy3: #1d3461;
-      --slate: #8892b0;
-      --slate2: #a8b2d8;
-      --white: #ccd6f6;
-      --white2: #e6f1ff;
-      --green: #64ffda;
-      --green2: #00b4d8;
-      --red: #c0392b;
+      --surface: #0f2039;
+      --surface2: #162840;
+      --border: #1e3a5f;
+      --accent: #00d4aa;
+      --accent2: #0096ff;
       --gold: #f0a500;
-      --bg: #0a192f;
-      --surface: #112240;
-      --surface2: #1d3461;
-      --border: #233554;
-      --text: #ccd6f6;
-      --muted: #8892b0;
-      --accent: #64ffda;
+      --white: #e8f4ff;
+      --white2: #ccd6f6;
+      --slate: #8892b0;
+      --muted: #546a8a;
+      --red: #e63946;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.75; font-size: 16px; }
+    html, body { height: 100%; overflow: hidden; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--white2); }
 
-    /* ── SCROLLBAR ── */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--navy); }
-    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+    /* ── HORIZONTAL SCROLL CONTAINER ── */
+    .h-scroll {
+      display: flex;
+      width: 100vw; height: 100vh;
+      overflow-x: auto; overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+    }
+    .h-scroll::-webkit-scrollbar { height: 4px; }
+    .h-scroll::-webkit-scrollbar-track { background: var(--bg); }
+    .h-scroll::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
 
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(10, 25, 47, 0.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 3rem; height: 60px;
-    }
-    .nav-logo {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 1.1rem; font-weight: 500;
-      color: var(--accent); text-decoration: none;
-      letter-spacing: 0.05em;
-    }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--muted); text-decoration: none; transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--accent); }
-    .nav-links .nav-num { color: var(--accent); margin-right: 4px; font-size: 0.65rem; }
-
-    /* ── HERO ── */
-    .hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 100px 3rem 4rem 10%;
+    /* ── PANELS ── */
+    .panel {
+      min-width: 100vw; height: 100vh;
+      scroll-snap-align: start;
+      display: flex; flex-direction: column;
       position: relative; overflow: hidden;
     }
-    .hero::before {
-      content: '';
-      position: absolute; top: 0; right: 0; bottom: 0;
-      width: 45%;
-      background: radial-gradient(ellipse at 70% 50%, rgba(100,255,218,0.05) 0%, transparent 70%);
-      pointer-events: none;
+
+    /* ── GLOBAL NAV DOTS ── */
+    .nav-dots {
+      position: fixed; bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex; gap: 0.6rem; z-index: 1000;
     }
-    .hero-greeting {
+    .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--muted); border: none; cursor: pointer;
+      transition: all 0.3s; padding: 0;
+    }
+    .dot.active { background: var(--accent); transform: scale(1.4); }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 56px;
+      background: rgba(5,13,26,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem;
+    }
+    .topbar-logo {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.9rem; color: var(--accent);
-      margin-bottom: 1.5rem; letter-spacing: 0.05em;
+      font-size: 1rem; color: var(--accent);
+      text-decoration: none; letter-spacing: 0.1em;
+    }
+    .topbar-nav { display: flex; gap: 0; }
+    .nav-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--muted); background: none; border: none; cursor: pointer;
+      padding: 0 1.2rem; height: 56px;
+      transition: all 0.2s; position: relative;
+    }
+    .nav-btn::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 2px; background: var(--accent);
+      transform: scaleX(0); transition: transform 0.2s;
+    }
+    .nav-btn:hover { color: var(--white); }
+    .nav-btn:hover::after, .nav-btn.active::after { transform: scaleX(1); }
+    .nav-btn.active { color: var(--accent); }
+
+    /* ── ARROW NAVIGATION ── */
+    .arrow {
+      position: fixed; top: 50%; z-index: 200;
+      transform: translateY(-50%);
+      background: rgba(0,212,170,0.08);
+      border: 1px solid var(--accent);
+      color: var(--accent); font-size: 1.2rem;
+      width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all 0.25s;
+      backdrop-filter: blur(4px);
+    }
+    .arrow:hover { background: rgba(0,212,170,0.2); }
+    .arrow.left { left: 1.2rem; }
+    .arrow.right { right: 1.2rem; }
+    .arrow.hidden { opacity: 0; pointer-events: none; }
+
+    /* ── SLIDE LABEL ── */
+    .slide-label {
+      position: absolute; top: 72px; left: 3rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem; color: var(--accent);
+      letter-spacing: 0.2em; text-transform: uppercase;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .slide-label::after {
+      content: ''; display: block; width: 60px; height: 1px;
+      background: var(--accent); opacity: 0.4;
+    }
+
+    /* ────────────────────────────────────────────────────
+       PANEL 0 — HOME
+    ──────────────────────────────────────────────────── */
+    #panel-home {
+      background:
+        radial-gradient(ellipse at 30% 50%, rgba(0,150,255,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(0,212,170,0.06) 0%, transparent 50%),
+        var(--bg);
+      flex-direction: row;
+    }
+    .home-left {
+      flex: 1; display: flex; flex-direction: column;
+      justify-content: center; padding: 5rem 3rem 5rem 6%;
+      max-width: 60%;
+    }
+    .home-right {
+      flex: 0 0 380px; display: flex; align-items: center;
+      justify-content: center; padding: 5rem 5% 5rem 0;
+    }
+    .greeting {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem; color: var(--accent);
+      letter-spacing: 0.08em; margin-bottom: 1.2rem;
     }
     .hero-name {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2.8rem, 6vw, 5rem);
-      font-weight: 800; line-height: 1.05;
-      color: var(--white2);
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 800; line-height: 1.05; color: var(--white);
       margin-bottom: 0.5rem;
     }
-    .hero-title {
+    .hero-role {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(1.5rem, 3vw, 2.5rem);
-      font-weight: 700; font-style: italic;
-      color: var(--slate2);
+      font-size: clamp(1rem, 2vw, 1.5rem);
+      font-style: italic; color: var(--accent2);
       margin-bottom: 2rem;
     }
     .hero-bio {
-      max-width: 580px;
-      font-size: 1rem; color: var(--slate);
-      line-height: 1.85; margin-bottom: 2.5rem;
-      border-left: 2px solid var(--accent);
-      padding-left: 1.5rem;
+      font-size: 0.95rem; color: var(--slate);
+      line-height: 1.9; max-width: 540px; margin-bottom: 2rem;
+      padding-left: 1.2rem; border-left: 2px solid var(--accent);
     }
-    .hero-bio strong { color: var(--white); }
-
-    /* ── STAT PILLS ── */
-    .hero-stats {
-      display: flex; gap: 1.5rem; flex-wrap: wrap;
-      margin-bottom: 2.5rem;
-    }
-    .stat-pill {
+    .hero-bio strong { color: var(--white2); }
+    .stat-row { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+    .stat-box {
       background: var(--surface);
       border: 1px solid var(--border);
       border-top: 2px solid var(--accent);
-      padding: 0.8rem 1.4rem; text-align: center;
-      min-width: 100px;
+      padding: 0.8rem 1.3rem; text-align: center; min-width: 90px;
     }
-    .stat-number {
+    .stat-n {
       font-family: 'Playfair Display', serif;
-      font-size: 1.6rem; font-weight: 800; color: var(--accent);
-      display: block;
+      font-size: 1.6rem; font-weight: 800; color: var(--accent); display: block;
     }
-    .stat-label {
+    .stat-l {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.62rem; color: var(--muted);
+      font-size: 0.58rem; color: var(--muted);
       text-transform: uppercase; letter-spacing: 0.08em;
     }
-
-    /* ── BUTTONS ── */
-    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
+    .cta-row { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 2rem; }
     .btn {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
-      padding: 0.8rem 1.8rem; text-decoration: none;
-      transition: all 0.25s; display: inline-block; cursor: pointer;
+      font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.7rem 1.6rem; text-decoration: none; cursor: pointer;
+      transition: all 0.25s; display: inline-block; border: none;
     }
-    .btn-primary {
-      background: transparent; color: var(--accent);
-      border: 1px solid var(--accent);
-    }
-    .btn-primary:hover { background: rgba(100,255,218,0.1); }
-    .btn-secondary {
-      background: transparent; color: var(--slate2);
-      border: 1px solid var(--border);
-    }
-    .btn-secondary:hover { border-color: var(--slate2); color: var(--white); }
-
-    /* ── SOCIAL ROW ── */
-    .social-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-a { background: var(--accent); color: var(--bg); }
+    .btn-a:hover { background: #00f0c0; }
+    .btn-b { background: transparent; color: var(--white2); border: 1px solid var(--border); }
+    .btn-b:hover { border-color: var(--accent); color: var(--accent); }
+    .social-row { display: flex; gap: 0.6rem; flex-wrap: wrap; }
     .social-chip {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.68rem; letter-spacing: 0.08em;
-      padding: 0.4rem 0.9rem;
-      background: transparent; color: var(--muted);
-      border: 1px solid var(--border);
+      font-size: 0.62rem; letter-spacing: 0.05em;
+      padding: 0.35rem 0.8rem;
+      color: var(--muted); border: 1px solid var(--border);
       text-decoration: none; transition: all 0.2s;
     }
     .social-chip:hover { color: var(--accent); border-color: var(--accent); }
 
-    /* ── PROFILE FLOATING CARD ── */
-    .hero-card {
-      position: absolute; right: 8%; top: 50%;
-      transform: translateY(-50%);
-      width: 280px;
-      background: var(--surface);
+    /* Profile Card */
+    .profile-card {
+      width: 300px; background: var(--surface);
       border: 1px solid var(--border);
-      padding: 0;
       overflow: hidden;
+      box-shadow: 0 0 60px rgba(0,212,170,0.08);
     }
-    .card-top {
-      background: linear-gradient(135deg, var(--navy3), var(--navy2));
-      padding: 2rem; text-align: center;
+    .pc-top {
+      background: linear-gradient(160deg, var(--surface2), var(--navy));
+      padding: 2.5rem 1.5rem 1.5rem; text-align: center;
       border-bottom: 1px solid var(--border);
       position: relative;
     }
-    .card-top::before {
+    .pc-top::before {
       content: '';
       position: absolute; inset: 0;
-      background: radial-gradient(circle at 50% 0%, rgba(100,255,218,0.1), transparent 70%);
+      background: radial-gradient(circle at 50% 0%, rgba(0,212,170,0.12), transparent 60%);
     }
-    .card-avatar {
-      width: 90px; height: 90px;
-      border-radius: 50%; overflow: hidden;
-      margin: 0 auto 1rem;
+    .pc-avatar {
+      width: 96px; height: 96px; border-radius: 50%;
+      overflow: hidden; margin: 0 auto 1rem;
       border: 2px solid var(--accent);
       position: relative; z-index: 1;
     }
-    .card-avatar img { width: 100%; height: 100%; object-fit: cover; }
-    .card-avatar-placeholder {
+    .pc-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .pc-avatar-ph {
       width: 100%; height: 100%;
-      background: linear-gradient(135deg, var(--navy3), var(--surface2));
+      background: linear-gradient(135deg, var(--surface2), var(--navy));
       display: flex; align-items: center; justify-content: center;
       font-family: 'Playfair Display', serif;
-      font-size: 1.8rem; color: var(--accent); font-weight: 800;
+      font-size: 2rem; color: var(--accent); font-weight: 800;
     }
-    .card-name {
+    .pc-name {
       font-family: 'Playfair Display', serif;
-      font-weight: 700; font-size: 0.95rem; color: var(--white2);
+      font-weight: 700; font-size: 0.95rem; color: var(--white);
       margin-bottom: 0.3rem; position: relative; z-index: 1;
     }
-    .card-role {
+    .pc-role {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.62rem; color: var(--accent);
-      letter-spacing: 0.08em; text-transform: uppercase;
+      font-size: 0.58rem; color: var(--accent);
+      letter-spacing: 0.1em; text-transform: uppercase;
       position: relative; z-index: 1;
     }
-    .card-body { padding: 1.2rem 1.5rem; }
-    .card-row {
+    .pc-body { padding: 1.2rem 1.5rem; }
+    .pc-row {
       display: flex; align-items: flex-start; gap: 0.6rem;
-      font-size: 0.78rem; color: var(--muted);
-      margin-bottom: 0.6rem; line-height: 1.4;
+      font-size: 0.75rem; color: var(--muted); margin-bottom: 0.55rem; line-height: 1.4;
     }
-    .card-row .ci { color: var(--accent); flex-shrink: 0; font-size: 0.85rem; }
-    .card-divider { border: none; border-top: 1px solid var(--border); margin: 1rem 0; }
-    .card-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-    .card-chip {
+    .pc-row .ci { color: var(--accent); flex-shrink: 0; }
+    .pc-div { border: none; border-top: 1px solid var(--border); margin: 0.9rem 0; }
+    .pc-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .pc-chip {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.6rem; letter-spacing: 0.05em;
-      padding: 0.2rem 0.6rem; border-radius: 2px;
-      background: rgba(100,255,218,0.05);
-      color: var(--accent); border: 1px solid rgba(100,255,218,0.2);
+      font-size: 0.58rem; letter-spacing: 0.05em;
+      padding: 0.2rem 0.6rem;
+      background: rgba(0,212,170,0.05);
+      color: var(--accent); border: 1px solid rgba(0,212,170,0.2);
       text-decoration: none; transition: all 0.2s;
     }
-    .card-chip:hover { background: rgba(100,255,218,0.15); }
+    .pc-chip:hover { background: rgba(0,212,170,0.15); }
 
-    /* ── SECTIONS ── */
-    section { padding: 6rem 3rem 6rem 10%; }
-    section + section { border-top: 1px solid var(--border); }
-    .section-inner { max-width: 900px; }
-    .section-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.72rem; color: var(--accent);
-      letter-spacing: 0.15em; text-transform: uppercase;
-      margin-bottom: 0.75rem;
-      display: flex; align-items: center; gap: 1rem;
+    /* ────────────────────────────────────────────────────
+       SHARED PANEL STYLES
+    ──────────────────────────────────────────────────── */
+    .panel-inner {
+      flex: 1; overflow-y: auto; overflow-x: hidden;
+      padding: 5.5rem 5% 4rem 6%;
+      display: flex; flex-direction: column;
     }
-    .section-label::after {
-      content: ''; flex: 1; max-width: 200px;
-      height: 1px; background: var(--border);
-    }
-    h2 {
+    .panel-inner::-webkit-scrollbar { width: 3px; }
+    .panel-inner::-webkit-scrollbar-thumb { background: var(--accent); }
+    .panel-title {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 3vw, 2.4rem);
-      font-weight: 800; color: var(--white2);
-      margin-bottom: 3rem; line-height: 1.2;
-    }
-
-    /* ── RESEARCH GRID ── */
-    .research-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
-    .research-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 1.75rem;
-      transition: all 0.3s;
-      position: relative; overflow: hidden;
-    }
-    .research-card::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: var(--accent);
-      transform: scaleX(0); transition: transform 0.3s;
-    }
-    .research-card:hover::before { transform: scaleX(1); }
-    .research-card:hover { transform: translateY(-4px); border-color: var(--accent); }
-    .rc-icon { font-size: 1.8rem; margin-bottom: 1rem; display: block; }
-    .rc-title {
-      font-family: 'Inter', sans-serif;
-      font-weight: 600; font-size: 0.92rem; color: var(--white2);
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 800; color: var(--white);
       margin-bottom: 0.5rem;
     }
-    .rc-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.7; }
+    .panel-sub { font-size: 0.88rem; color: var(--muted); margin-bottom: 2.5rem; }
 
-    /* ── PUBLICATIONS ── */
-    .pub-list { display: flex; flex-direction: column; gap: 1.5rem; }
+    /* ────────────────────────────────────────────────────
+       PANEL 1 — RESEARCH
+    ──────────────────────────────────────────────────── */
+    #panel-research { background: linear-gradient(135deg, var(--bg) 0%, #071525 100%); }
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem; flex: 1;
+    }
+    .rc {
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 1.5rem; transition: all 0.3s; position: relative; overflow: hidden;
+    }
+    .rc::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transform: scaleX(0); transition: transform 0.3s;
+    }
+    .rc:hover::before { transform: scaleX(1); }
+    .rc:hover { border-color: rgba(0,212,170,0.3); transform: translateY(-3px); }
+    .rc-icon { font-size: 1.6rem; margin-bottom: 0.75rem; display: block; }
+    .rc-title { font-weight: 600; font-size: 0.88rem; color: var(--white); margin-bottom: 0.4rem; }
+    .rc-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.7; }
+
+    /* ────────────────────────────────────────────────────
+       PANEL 2 — PUBLICATIONS
+    ──────────────────────────────────────────────────── */
+    #panel-publications {
+      background: linear-gradient(135deg, #040c18 0%, var(--bg) 100%);
+    }
+    .pub-tabs { display: flex; gap: 0; margin-bottom: 2rem; border-bottom: 1px solid var(--border); }
+    .pub-tab {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--muted); background: none; border: none; cursor: pointer;
+      padding: 0.6rem 1.5rem; position: relative; transition: color 0.2s;
+    }
+    .pub-tab.active { color: var(--accent); }
+    .pub-tab.active::after {
+      content: ''; position: absolute; bottom: -1px; left: 0; right: 0;
+      height: 2px; background: var(--accent);
+    }
+    .pub-section { display: none; }
+    .pub-section.active { display: flex; flex-direction: column; gap: 1.2rem; }
     .pub-card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-left: 3px solid var(--accent);
-      padding: 1.75rem 2rem;
-      transition: all 0.25s;
-      position: relative;
+      padding: 1.4rem 1.8rem; transition: all 0.25s;
     }
-    .pub-card:hover { border-left-color: var(--green2); background: var(--surface2); }
-    .pub-top {
-      display: flex; align-items: center; gap: 0.75rem;
-      flex-wrap: wrap; margin-bottom: 0.75rem;
-    }
-    .pub-year {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.68rem; color: var(--accent);
-      letter-spacing: 0.1em;
-    }
-    .pub-type {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.62rem; letter-spacing: 0.08em;
-      padding: 0.15rem 0.6rem;
-      background: rgba(100,255,218,0.08);
-      color: var(--accent); border: 1px solid rgba(100,255,218,0.2);
-    }
+    .pub-card:hover { border-left-color: var(--accent2); background: var(--surface2); }
+    .pub-top { display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; margin-bottom: 0.7rem; }
+    .pub-yr { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--accent); }
     .pub-badge {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.6rem; letter-spacing: 0.08em;
-      padding: 0.15rem 0.6rem;
-      background: rgba(240,165,0,0.1);
-      color: var(--gold); border: 1px solid rgba(240,165,0,0.3);
+      font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+      padding: 0.1rem 0.55rem;
+      background: rgba(240,165,0,0.1); color: var(--gold);
+      border: 1px solid rgba(240,165,0,0.3);
     }
-    .pub-venue {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.68rem; color: var(--muted); margin-left: auto;
-    }
+    .pub-v { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--muted); }
     .pub-title {
       font-family: 'Playfair Display', serif;
-      font-size: 1rem; font-weight: 700; color: var(--white2);
-      line-height: 1.5; margin-bottom: 0.4rem;
+      font-size: 0.95rem; font-weight: 700; color: var(--white);
+      line-height: 1.5; margin-bottom: 0.35rem;
     }
-    .pub-authors { font-size: 0.82rem; color: var(--muted); margin-bottom: 0.4rem; }
-    .pub-authors strong { color: var(--slate2); }
-    .pub-details { font-size: 0.78rem; color: var(--muted); font-style: italic; margin-bottom: 0.75rem; }
-    .pub-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .pub-authors { font-size: 0.78rem; color: var(--muted); margin-bottom: 0.3rem; }
+    .pub-authors strong { color: var(--white2); }
+    .pub-details { font-size: 0.73rem; color: var(--muted); font-style: italic; margin-bottom: 0.7rem; }
+    .pub-links { display: flex; gap: 0.6rem; }
     .pub-link {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem; letter-spacing: 0.05em;
-      color: var(--accent); text-decoration: none;
-      padding: 0.25rem 0.7rem; border: 1px solid rgba(100,255,218,0.3);
+      font-size: 0.62rem; color: var(--accent); text-decoration: none;
+      padding: 0.22rem 0.65rem; border: 1px solid rgba(0,212,170,0.3);
       transition: all 0.2s;
     }
-    .pub-link:hover { background: rgba(100,255,218,0.1); }
+    .pub-link:hover { background: rgba(0,212,170,0.1); }
 
-    /* ── SKILLS ── */
-    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
-    .skill-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 1.5rem 1.75rem;
+    /* ────────────────────────────────────────────────────
+       PANEL 3 — SKILLS
+    ──────────────────────────────────────────────────── */
+    #panel-skills { background: linear-gradient(135deg, #061020 0%, var(--bg) 100%); }
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem; flex: 1;
     }
-    .skill-header {
-      display: flex; align-items: center; gap: 0.75rem;
-      font-family: 'Inter', sans-serif;
-      font-weight: 600; font-size: 0.9rem; color: var(--white2);
-      margin-bottom: 1.2rem; padding-bottom: 0.75rem;
+    .skill-card {
+      background: var(--surface); border: 1px solid var(--border); padding: 1.5rem;
+    }
+    .skill-head {
+      font-weight: 600; font-size: 0.88rem; color: var(--white);
+      margin-bottom: 1rem; padding-bottom: 0.6rem;
       border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 0.6rem;
     }
     .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
     .skill-tag {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.68rem; letter-spacing: 0.05em;
-      padding: 0.3rem 0.75rem;
-      background: rgba(100,255,218,0.04);
-      color: var(--slate2); border: 1px solid var(--border);
-      transition: all 0.2s;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+      padding: 0.28rem 0.7rem;
+      background: rgba(0,212,170,0.04); color: var(--slate2);
+      border: 1px solid var(--border); transition: all 0.2s;
     }
-    .skill-tag:hover { color: var(--accent); border-color: rgba(100,255,218,0.3); }
+    .skill-tag:hover { color: var(--accent); border-color: rgba(0,212,170,0.3); }
 
-    /* ── EDUCATION TIMELINE ── */
-    .timeline { position: relative; padding-left: 2rem; }
+    /* ────────────────────────────────────────────────────
+       PANEL 4 — EDUCATION
+    ──────────────────────────────────────────────────── */
+    #panel-education { background: linear-gradient(135deg, var(--bg) 0%, #040e1c 100%); }
+    .timeline { position: relative; padding-left: 2.5rem; }
     .timeline::before {
       content: ''; position: absolute; left: 0; top: 0; bottom: 0;
       width: 1px; background: var(--border);
     }
-    .tl-item { position: relative; margin-bottom: 2.5rem; }
+    .tl-item { position: relative; margin-bottom: 2.2rem; }
     .tl-dot {
-      position: absolute; left: -2.45rem; top: 0.4rem;
-      width: 10px; height: 10px; border-radius: 50%;
-      background: var(--bg); border: 2px solid var(--accent);
+      position: absolute; left: -2.75rem; top: 0.3rem;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--bg); border: 2px solid var(--muted);
     }
-    .tl-dot.active { background: var(--accent); box-shadow: 0 0 12px rgba(100,255,218,0.5); }
-    .tl-year {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem; color: var(--accent); letter-spacing: 0.1em;
-      margin-bottom: 0.3rem;
+    .tl-dot.active {
+      border-color: var(--accent); background: var(--accent);
+      box-shadow: 0 0 14px rgba(0,212,170,0.5);
     }
-    .tl-role {
-      font-family: 'Inter', sans-serif;
-      font-weight: 700; font-size: 1rem; color: var(--white2);
-      margin-bottom: 0.15rem;
-    }
-    .tl-place { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.4rem; }
+    .tl-year { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--accent); margin-bottom: 0.25rem; }
+    .tl-role { font-weight: 700; font-size: 0.98rem; color: var(--white); margin-bottom: 0.15rem; }
+    .tl-place { font-size: 0.82rem; color: var(--muted); margin-bottom: 0.4rem; }
     .tl-cgpa {
       display: inline-block;
-      font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.62rem;
       color: var(--gold); border: 1px solid rgba(240,165,0,0.3);
       padding: 0.1rem 0.6rem; margin-bottom: 0.6rem;
-      background: rgba(240,165,0,0.05);
     }
-    .tl-points { list-style: none; }
-    .tl-points li {
-      font-size: 0.82rem; color: var(--muted); line-height: 1.7;
-      padding-left: 1rem; position: relative; margin-bottom: 0.2rem;
+    .tl-pts { list-style: none; }
+    .tl-pts li {
+      font-size: 0.8rem; color: var(--muted); line-height: 1.7;
+      padding-left: 1rem; position: relative; margin-bottom: 0.15rem;
     }
-    .tl-points li::before {
-      content: '▸'; position: absolute; left: 0; color: var(--accent); font-size: 0.7rem;
-    }
+    .tl-pts li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); font-size: 0.65rem; }
 
-    /* ── CONTACT ── */
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-    .contact-intro { font-size: 1rem; color: var(--muted); line-height: 1.85; margin-bottom: 2rem; }
+    /* ────────────────────────────────────────────────────
+       PANEL 5 — CONTACT
+    ──────────────────────────────────────────────────── */
+    #panel-contact {
+      background:
+        radial-gradient(ellipse at 80% 80%, rgba(0,150,255,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse at 20% 20%, rgba(0,212,170,0.05) 0%, transparent 50%),
+        var(--bg);
+    }
+    .contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; flex: 1; align-items: start; }
+    .contact-intro { font-size: 0.95rem; color: var(--muted); line-height: 1.9; margin-bottom: 2rem; }
     .contact-intro a { color: var(--accent); text-decoration: none; }
-    .contact-cards { display: flex; flex-direction: column; gap: 1rem; }
-    .contact-card {
-      display: flex; align-items: center; gap: 1.2rem;
-      padding: 1rem 1.4rem;
+    .contact-cards { display: flex; flex-direction: column; gap: 0.9rem; }
+    .cc {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 0.9rem 1.3rem;
       background: var(--surface); border: 1px solid var(--border);
       transition: border-color 0.2s;
     }
-    .contact-card:hover { border-color: var(--accent); }
-    .cc-icon { font-size: 1.2rem; flex-shrink: 0; }
-    .cc-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 0.2rem;
-    }
-    .cc-value { font-size: 0.85rem; color: var(--slate2); }
-    .cc-value a { color: var(--slate2); text-decoration: none; }
-    .cc-value a:hover { color: var(--accent); }
-
-    /* ── LOCATION BOX ── */
-    .location-box {
+    .cc:hover { border-color: var(--accent); }
+    .cc-icon { font-size: 1.1rem; flex-shrink: 0; }
+    .cc-lbl { font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.18rem; }
+    .cc-val { font-size: 0.82rem; color: var(--white2); }
+    .cc-val a { color: var(--white2); text-decoration: none; }
+    .cc-val a:hover { color: var(--accent); }
+    .loc-box {
       background: var(--surface); border: 1px solid var(--border);
       padding: 2.5rem; text-align: center;
     }
-    .loc-icon { font-size: 3rem; margin-bottom: 1rem; display: block; }
-    .loc-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem; font-weight: 700; color: var(--white2);
-      margin-bottom: 0.5rem;
-    }
-    .loc-sub { font-size: 0.82rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.5rem; }
+    .loc-emoji { font-size: 3rem; margin-bottom: 1rem; display: block; }
+    .loc-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 0.4rem; }
+    .loc-sub { font-size: 0.8rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.5rem; }
     .loc-links { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
 
-    /* ── FOOTER ── */
-    footer {
-      padding: 2rem 3rem 2rem 10%;
-      border-top: 1px solid var(--border);
-      display: flex; justify-content: space-between; align-items: center;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.68rem; color: var(--muted);
+    /* ── PANEL BG LINES ── */
+    .bg-lines {
+      position: absolute; inset: 0; pointer-events: none; overflow: hidden; opacity: 0.03;
     }
-    footer a { color: var(--accent); text-decoration: none; }
-
-    /* ── ANIMATIONS ── */
-    .fade-in { opacity: 0; transform: translateY(24px); animation: fadeUp 0.7s ease forwards; }
-    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-    .d1{animation-delay:.1s} .d2{animation-delay:.2s} .d3{animation-delay:.3s}
-    .d4{animation-delay:.4s} .d5{animation-delay:.5s} .d6{animation-delay:.6s}
+    .bg-lines::before, .bg-lines::after {
+      content: ''; position: absolute;
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+    }
+    .bg-lines::before { width: 600px; height: 600px; top: -200px; right: -200px; }
+    .bg-lines::after { width: 400px; height: 400px; bottom: -150px; left: -150px; }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 1100px) {
-      .hero-card { display: none; }
-      .hero { padding: 100px 3rem 4rem; }
+    @media (max-width: 900px) {
+      html, body { overflow: auto; }
+      .h-scroll { flex-direction: column; overflow-x: hidden; overflow-y: auto; height: auto; }
+      .panel { min-width: 100vw; height: auto; min-height: 100vh; }
+      #panel-home { flex-direction: column; }
+      .home-left { max-width: 100%; padding: 5rem 1.5rem 2rem; }
+      .home-right { padding: 0 1.5rem 3rem; justify-content: flex-start; }
+      .profile-card { width: 100%; max-width: 340px; }
+      .research-grid { grid-template-columns: 1fr 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .contact-wrap { grid-template-columns: 1fr; }
+      .panel-inner { padding: 5rem 1.5rem 3rem; }
+      .arrow { display: none; }
     }
-    @media (max-width: 768px) {
-      nav { padding: 0 1.5rem; }
-      .nav-links { gap: 1rem; }
-      .nav-links .nav-num { display: none; }
-      section { padding: 4rem 1.5rem; }
-      .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem; }
+    @media (max-width: 600px) {
+      .research-grid { grid-template-columns: 1fr; }
+      .topbar-nav { display: none; }
     }
   </style>
 </head>
 <body>
 
-<!-- ── NAV ── -->
-<nav>
-  <a href="#" class="nav-logo">{{ site.author.initials }}</a>
-  <ul class="nav-links">
-    <li><a href="#research"><span class="nav-num">01.</span>Research</a></li>
-    <li><a href="#publications"><span class="nav-num">02.</span>Publications</a></li>
-    <li><a href="#skills"><span class="nav-num">03.</span>Skills</a></li>
-    <li><a href="#education"><span class="nav-num">04.</span>Education</a></li>
-    <li><a href="#contact"><span class="nav-num">05.</span>Contact</a></li>
-  </ul>
-</nav>
-
-<!-- ── HERO ── -->
-<section class="hero" id="home">
-  <p class="hero-greeting fade-in">👋 Hi, I am</p>
-  <h1 class="hero-name fade-in d1">{{ site.author.name }}</h1>
-  <p class="hero-title fade-in d2">{{ site.author.role }} · {{ site.author.department }}</p>
-  <p class="hero-bio fade-in d3">{{ site.author.bio }}</p>
-
-  <div class="hero-stats fade-in d4">
-    {% for stat in site.stats %}
-    <div class="stat-pill">
-      <span class="stat-number">{{ stat.number }}</span>
-      <span class="stat-label">{{ stat.label }}</span>
-    </div>
-    {% endfor %}
+<!-- TOP BAR -->
+<div class="topbar">
+  <a href="#" class="topbar-logo" onclick="goTo(0)">{{ site.author.initials }}</a>
+  <div class="topbar-nav">
+    <button class="nav-btn active" onclick="goTo(0)">Home</button>
+    <button class="nav-btn" onclick="goTo(1)">Research</button>
+    <button class="nav-btn" onclick="goTo(2)">Publications</button>
+    <button class="nav-btn" onclick="goTo(3)">Skills</button>
+    <button class="nav-btn" onclick="goTo(4)">Education</button>
+    <button class="nav-btn" onclick="goTo(5)">Contact</button>
   </div>
+</div>
 
-  <div class="hero-ctas fade-in d5">
-    <a href="#publications" class="btn btn-primary">View Publications</a>
-    <a href="{{ site.cv_file }}" class="btn btn-secondary" target="_blank">Download CV</a>
-    <a href="#contact" class="btn btn-secondary">Get in Touch</a>
-  </div>
+<!-- LEFT/RIGHT ARROWS -->
+<button class="arrow left hidden" id="arrowLeft" onclick="navigate(-1)">&#8592;</button>
+<button class="arrow right" id="arrowRight" onclick="navigate(1)">&#8594;</button>
 
-  <div class="social-row fade-in d6">
-    <a href="mailto:{{ site.author.email }}" class="social-chip">✉ Email</a>
-    {% if site.author.linkedin %}<a href="{{ site.author.linkedin }}" class="social-chip" target="_blank">in LinkedIn</a>{% endif %}
-    {% if site.author.googlescholar %}<a href="{{ site.author.googlescholar }}" class="social-chip" target="_blank">◎ Scholar</a>{% endif %}
-    {% if site.author.researchgate %}<a href="{{ site.author.researchgate }}" class="social-chip" target="_blank">Rg ResearchGate</a>{% endif %}
-    {% if site.author.github %}<a href="{{ site.author.github }}" class="social-chip" target="_blank">⌥ GitHub</a>{% endif %}
-  </div>
+<!-- NAV DOTS -->
+<div class="nav-dots">
+  <button class="dot active" onclick="goTo(0)" title="Home"></button>
+  <button class="dot" onclick="goTo(1)" title="Research"></button>
+  <button class="dot" onclick="goTo(2)" title="Publications"></button>
+  <button class="dot" onclick="goTo(3)" title="Skills"></button>
+  <button class="dot" onclick="goTo(4)" title="Education"></button>
+  <button class="dot" onclick="goTo(5)" title="Contact"></button>
+</div>
 
-  <!-- Floating Profile Card -->
-  <div class="hero-card">
-    <div class="card-top">
-      <div class="card-avatar">
-        {% if site.author.photo %}
-          <img src="{{ site.author.photo }}" alt="{{ site.author.name }}" onerror="this.parentElement.innerHTML='<div class=\'card-avatar-placeholder\'>{{ site.author.initials }}</div>'">
-        {% else %}
-          <div class="card-avatar-placeholder">{{ site.author.initials }}</div>
-        {% endif %}
-      </div>
-      <div class="card-name">{{ site.author.name }}</div>
-      <div class="card-role">{{ site.author.role }}</div>
-    </div>
-    <div class="card-body">
-      <div class="card-row"><span class="ci">🏛</span><span>{{ site.author.institution }}</span></div>
-      <div class="card-row"><span class="ci">🔬</span><span>{{ site.author.supervisor }}</span></div>
-      <div class="card-row"><span class="ci">🎓</span><span>CGPA {{ site.author.cgpa }}</span></div>
-      <div class="card-row"><span class="ci">📍</span><span>{{ site.author.location }}</span></div>
-      <hr class="card-divider"/>
-      <div class="card-chips">
-        <a href="mailto:{{ site.author.email }}" class="card-chip">Email</a>
-        {% if site.author.linkedin %}<a href="{{ site.author.linkedin }}" class="card-chip" target="_blank">LinkedIn</a>{% endif %}
-        {% if site.author.googlescholar %}<a href="{{ site.author.googlescholar }}" class="card-chip" target="_blank">Scholar</a>{% endif %}
-        {% if site.author.researchgate %}<a href="{{ site.author.researchgate }}" class="card-chip" target="_blank">ResearchGate</a>{% endif %}
-      </div>
-    </div>
-  </div>
-</section>
+<!-- HORIZONTAL SCROLL WRAPPER -->
+<div class="h-scroll" id="hscroll">
 
-<!-- ── RESEARCH ── -->
-<section id="research">
-  <div class="section-inner">
-    <p class="section-label">01. Research</p>
-    <h2>Areas of Research Interest</h2>
-    <div class="research-grid">
-      {% for item in site.data.research %}
-      <div class="research-card">
-        <span class="rc-icon">{{ item.icon }}</span>
-        <div class="rc-title">{{ item.title }}</div>
-        <div class="rc-desc">{{ item.desc }}</div>
-      </div>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-
-<!-- ── PUBLICATIONS ── -->
-<section id="publications">
-  <div class="section-inner">
-    <p class="section-label">02. Publications</p>
-    <h2>Research Publications</h2>
-    <div class="pub-list">
-      {% for pub in site.data.publications %}
-      <div class="pub-card">
-        <div class="pub-top">
-          <span class="pub-year">{{ pub.year }}</span>
-          <span class="pub-type">{{ pub.type }}</span>
-          {% if pub.badge %}<span class="pub-badge">{{ pub.badge }}</span>{% endif %}
-          <span class="pub-venue">{{ pub.venue }}</span>
+  <!-- ── PANEL 0: HOME ── -->
+  <div class="panel" id="panel-home">
+    <div class="bg-lines"></div>
+    <div class="home-left">
+      <p class="greeting">👋 Hello, I am</p>
+      <h1 class="hero-name">{{ site.author.name }}</h1>
+      <p class="hero-role">{{ site.author.role }}</p>
+      <p class="hero-bio">{{ site.author.bio }}</p>
+      <div class="stat-row">
+        {% for s in site.stats %}
+        <div class="stat-box">
+          <span class="stat-n">{{ s.number }}</span>
+          <span class="stat-l">{{ s.label }}</span>
         </div>
-        <div class="pub-title">{{ pub.title }}</div>
-        <div class="pub-authors">{{ pub.authors }}</div>
-        <div class="pub-details">{{ pub.details }}</div>
-        <div class="pub-links">
-          {% if pub.doi_url %}<a href="{{ pub.doi_url }}" class="pub-link" target="_blank">DOI ↗</a>{% endif %}
-          {% if pub.doi_url %}<a href="{{ pub.doi_url }}" class="pub-link" target="_blank">Full Paper ↗</a>{% endif %}
+        {% endfor %}
+      </div>
+      <div class="cta-row">
+        <button class="btn btn-a" onclick="goTo(2)">View Publications</button>
+        <a href="{{ site.cv_file }}" class="btn btn-b" target="_blank">Download CV</a>
+        <button class="btn btn-b" onclick="goTo(5)">Contact Me</button>
+      </div>
+      <div class="social-row">
+        <a href="mailto:{{ site.author.email }}" class="social-chip">✉ Email</a>
+        {% if site.author.linkedin %}<a href="{{ site.author.linkedin }}" class="social-chip" target="_blank">LinkedIn</a>{% endif %}
+        {% if site.author.googlescholar %}<a href="{{ site.author.googlescholar }}" class="social-chip" target="_blank">Google Scholar</a>{% endif %}
+        {% if site.author.researchgate %}<a href="{{ site.author.researchgate }}" class="social-chip" target="_blank">ResearchGate</a>{% endif %}
+        {% if site.author.orcid %}<a href="https://orcid.org/{{ site.author.orcid }}" class="social-chip" target="_blank">ORCID</a>{% endif %}
+      </div>
+    </div>
+    <div class="home-right">
+      <div class="profile-card">
+        <div class="pc-top">
+          <div class="pc-avatar">
+            {% if site.author.photo %}
+              <img src="{{ site.author.photo }}" alt="{{ site.author.name }}" onerror="this.parentElement.innerHTML='<div class=\'pc-avatar-ph\'>{{ site.author.initials }}</div>'">
+            {% else %}
+              <div class="pc-avatar-ph">{{ site.author.initials }}</div>
+            {% endif %}
+          </div>
+          <div class="pc-name">{{ site.author.name }}</div>
+          <div class="pc-role">{{ site.author.role }}</div>
         </div>
-      </div>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-
-<!-- ── SKILLS ── -->
-<section id="skills">
-  <div class="section-inner">
-    <p class="section-label">03. Skills</p>
-    <h2>Core Competencies</h2>
-    <div class="skills-grid">
-      {% for group in site.data.skills %}
-      <div class="skill-card">
-        <div class="skill-header"><span>{{ group.icon }}</span> {{ group.group }}</div>
-        <div class="skill-tags">
-          {% for tag in group.tags %}
-          <span class="skill-tag">{{ tag }}</span>
-          {% endfor %}
-        </div>
-      </div>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-
-<!-- ── EDUCATION ── -->
-<section id="education">
-  <div class="section-inner">
-    <p class="section-label">04. Education</p>
-    <h2>Academic Background</h2>
-    <div class="timeline">
-      {% for edu in site.data.education %}
-      <div class="tl-item">
-        <div class="tl-dot {% if edu.current %}active{% endif %}"></div>
-        <div class="tl-year">{{ edu.year }}</div>
-        <div class="tl-role">{{ edu.role }}</div>
-        <div class="tl-place">{{ edu.place }}</div>
-        <div class="tl-cgpa">CGPA: {{ edu.cgpa }}</div>
-        {% if edu.points %}
-        <ul class="tl-points">
-          {% for point in edu.points %}
-          <li>{{ point }}</li>
-          {% endfor %}
-        </ul>
-        {% endif %}
-      </div>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-
-<!-- ── CONTACT ── -->
-<section id="contact">
-  <div class="section-inner">
-    <p class="section-label">05. Contact</p>
-    <h2>Get in Touch</h2>
-    <div class="contact-grid">
-      <div>
-        <p class="contact-intro">
-          I'm open to <strong style="color:#ccd6f6">research collaborations</strong>, reviewing manuscripts, conference discussions, and conversations around cold-formed steel structures, experimental mechanics, and seismic engineering.<br/><br/>
-          Feel free to reach out via email at <a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a> — I typically respond within 48 hours.
-        </p>
-        <div class="contact-cards">
-          <div class="contact-card">
-            <span class="cc-icon">✉️</span>
-            <div>
-              <div class="cc-label">Email</div>
-              <div class="cc-value"><a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a></div>
-            </div>
-          </div>
-          <div class="contact-card">
-            <span class="cc-icon">📞</span>
-            <div>
-              <div class="cc-label">Phone</div>
-              <div class="cc-value">{{ site.author.phone }}</div>
-            </div>
-          </div>
-          <div class="contact-card">
-            <span class="cc-icon">🏛️</span>
-            <div>
-              <div class="cc-label">Institution</div>
-              <div class="cc-value">{{ site.author.department }}, {{ site.author.institution }}</div>
-            </div>
-          </div>
-          <div class="contact-card">
-            <span class="cc-icon">🔬</span>
-            <div>
-              <div class="cc-label">Supervisor</div>
-              <div class="cc-value">{{ site.author.supervisor }}</div>
-            </div>
+        <div class="pc-body">
+          <div class="pc-row"><span class="ci">🏛</span><span>{{ site.author.institution }}</span></div>
+          <div class="pc-row"><span class="ci">🔬</span><span>{{ site.author.supervisor }}</span></div>
+          <div class="pc-row"><span class="ci">🎓</span><span>CGPA {{ site.author.cgpa }}</span></div>
+          <div class="pc-row"><span class="ci">📍</span><span>{{ site.author.location }}</span></div>
+          {% if site.author.orcid %}<div class="pc-row"><span class="ci">🆔</span><span>ORCID: {{ site.author.orcid }}</span></div>{% endif %}
+          <hr class="pc-div"/>
+          <div class="pc-chips">
+            <a href="mailto:{{ site.author.email }}" class="pc-chip">Email</a>
+            {% if site.author.googlescholar %}<a href="{{ site.author.googlescholar }}" class="pc-chip" target="_blank">Scholar</a>{% endif %}
+            {% if site.author.researchgate %}<a href="{{ site.author.researchgate }}" class="pc-chip" target="_blank">ResearchGate</a>{% endif %}
+            {% if site.author.linkedin %}<a href="{{ site.author.linkedin }}" class="pc-chip" target="_blank">LinkedIn</a>{% endif %}
           </div>
         </div>
       </div>
-      <div class="location-box">
-        <span class="loc-icon">🗺️</span>
-        <div class="loc-name">{{ site.author.institution }}</div>
-        <div class="loc-sub">Kandi, Sangareddy District<br/>Telangana, India – 502284</div>
-        <div class="loc-links">
-          <a href="https://www.iith.ac.in" class="btn btn-primary" target="_blank">IITH Website</a>
-          <a href="{{ site.cv_file }}" class="btn btn-secondary" target="_blank">Download CV</a>
+    </div>
+  </div>
+
+  <!-- ── PANEL 1: RESEARCH ── -->
+  <div class="panel" id="panel-research">
+    <div class="bg-lines"></div>
+    <div class="panel-inner">
+      <div class="slide-label">01 · Research</div>
+      <h2 class="panel-title">Areas of Research Interest</h2>
+      <p class="panel-sub">Structural Engineering · Cold-Formed Steel · Experimental & Computational Mechanics</p>
+      <div class="research-grid">
+        {% for item in site.data.research %}
+        <div class="rc">
+          <span class="rc-icon">{{ item.icon }}</span>
+          <div class="rc-title">{{ item.title }}</div>
+          <div class="rc-desc">{{ item.desc }}</div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PANEL 2: PUBLICATIONS ── -->
+  <div class="panel" id="panel-publications">
+    <div class="bg-lines"></div>
+    <div class="panel-inner">
+      <div class="slide-label">02 · Publications</div>
+      <h2 class="panel-title">Research Publications</h2>
+      <div class="pub-tabs">
+        <button class="pub-tab active" onclick="switchTab('journals', this)">Journal Articles ({{ site.data.publications.journals.size }})</button>
+        <button class="pub-tab" onclick="switchTab('conferences', this)">Conference Proceedings ({{ site.data.publications.conferences.size }})</button>
+      </div>
+      <div class="pub-section active" id="tab-journals">
+        {% for pub in site.data.publications.journals %}
+        <div class="pub-card">
+          <div class="pub-top">
+            <span class="pub-yr">{{ pub.year }}</span>
+            <span class="pub-badge">{{ pub.badge }}</span>
+            <span class="pub-v">{{ pub.venue }}</span>
+          </div>
+          <div class="pub-title">{{ pub.title }}</div>
+          <div class="pub-authors">{{ pub.authors }}</div>
+          {% if pub.details %}<div class="pub-details">{{ pub.details }}</div>{% endif %}
+          <div class="pub-links">
+            {% if pub.doi_url %}<a href="{{ pub.doi_url }}" class="pub-link" target="_blank">DOI ↗</a>{% endif %}
+            {% if pub.doi_url %}<a href="{{ pub.doi_url }}" class="pub-link" target="_blank">Full Paper ↗</a>{% endif %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="pub-section" id="tab-conferences">
+        {% for pub in site.data.publications.conferences %}
+        <div class="pub-card">
+          <div class="pub-top">
+            <span class="pub-yr">{{ pub.year }}</span>
+            <span class="pub-badge">{{ pub.badge }}</span>
+            <span class="pub-v">{{ pub.venue }}</span>
+          </div>
+          <div class="pub-title">{{ pub.title }}</div>
+          <div class="pub-authors">{{ pub.authors }}</div>
+          {% if pub.details %}<div class="pub-details">{{ pub.details }}</div>{% endif %}
+          <div class="pub-links">
+            {% if pub.doi_url %}<a href="{{ pub.doi_url }}" class="pub-link" target="_blank">DOI ↗</a>{% endif %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PANEL 3: SKILLS ── -->
+  <div class="panel" id="panel-skills">
+    <div class="bg-lines"></div>
+    <div class="panel-inner">
+      <div class="slide-label">03 · Skills</div>
+      <h2 class="panel-title">Core Competencies</h2>
+      <p class="panel-sub">Experimental · Numerical · Programming · Design Codes</p>
+      <div class="skills-grid">
+        {% for group in site.data.skills %}
+        <div class="skill-card">
+          <div class="skill-head"><span>{{ group.icon }}</span> {{ group.group }}</div>
+          <div class="skill-tags">
+            {% for tag in group.tags %}
+            <span class="skill-tag">{{ tag }}</span>
+            {% endfor %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PANEL 4: EDUCATION ── -->
+  <div class="panel" id="panel-education">
+    <div class="bg-lines"></div>
+    <div class="panel-inner">
+      <div class="slide-label">04 · Education</div>
+      <h2 class="panel-title">Academic Background</h2>
+      <p class="panel-sub">IIT Hyderabad · Anna University</p>
+      <div class="timeline">
+        {% for edu in site.data.education %}
+        <div class="tl-item">
+          <div class="tl-dot {% if edu.current %}active{% endif %}"></div>
+          <div class="tl-year">{{ edu.year }}</div>
+          <div class="tl-role">{{ edu.role }}</div>
+          <div class="tl-place">{{ edu.place }}</div>
+          <div class="tl-cgpa">CGPA {{ edu.cgpa }}</div>
+          {% if edu.points %}
+          <ul class="tl-pts">
+            {% for p in edu.points %}<li>{{ p }}</li>{% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PANEL 5: CONTACT ── -->
+  <div class="panel" id="panel-contact">
+    <div class="bg-lines"></div>
+    <div class="panel-inner">
+      <div class="slide-label">05 · Contact</div>
+      <h2 class="panel-title">Get in Touch</h2>
+      <p class="panel-sub">Open to research collaborations, manuscript reviews, and academic discussions</p>
+      <div class="contact-wrap">
+        <div>
+          <p class="contact-intro">
+            I welcome conversations around <strong style="color:#e8f4ff">cold-formed steel structures</strong>, experimental mechanics, seismic engineering, and research collaborations. Feel free to reach out at <a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a> — I typically respond within 48 hours.
+          </p>
+          <div class="contact-cards">
+            <div class="cc"><span class="cc-icon">✉️</span><div><div class="cc-lbl">Email</div><div class="cc-val"><a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a></div></div></div>
+            <div class="cc"><span class="cc-icon">📞</span><div><div class="cc-lbl">Phone</div><div class="cc-val">{{ site.author.phone }}</div></div></div>
+            <div class="cc"><span class="cc-icon">🏛️</span><div><div class="cc-lbl">Institution</div><div class="cc-val">{{ site.author.department }}, {{ site.author.institution }}</div></div></div>
+            <div class="cc"><span class="cc-icon">🔬</span><div><div class="cc-lbl">Supervisor</div><div class="cc-val">{{ site.author.supervisor }}</div></div></div>
+            {% if site.author.orcid %}<div class="cc"><span class="cc-icon">🆔</span><div><div class="cc-lbl">ORCID</div><div class="cc-val"><a href="https://orcid.org/{{ site.author.orcid }}" target="_blank">{{ site.author.orcid }}</a></div></div></div>{% endif %}
+          </div>
+        </div>
+        <div>
+          <div class="loc-box">
+            <span class="loc-emoji">🗺️</span>
+            <div class="loc-name">{{ site.author.institution }}</div>
+            <div class="loc-sub">Kandi, Sangareddy District<br/>Telangana, India – 502284</div>
+            <div class="loc-links">
+              <a href="https://www.iith.ac.in" class="btn btn-a" target="_blank">IITH Website</a>
+              <a href="{{ site.cv_file }}" class="btn btn-b" target="_blank">Download CV</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</section>
 
-<!-- ── FOOTER ── -->
-<footer>
-  <span>© {% assign y = site.time | date: "%Y" %}{{ y }} {{ site.author.name }}</span>
-  <span>Built with Jekyll · Hosted on <a href="{{ site.author.github }}" target="_blank">GitHub Pages</a></span>
-</footer>
+</div><!-- end h-scroll -->
 
+<script>
+  const scroll = document.getElementById('hscroll');
+  const dots = document.querySelectorAll('.dot');
+  const navBtns = document.querySelectorAll('.nav-btn');
+  const arrowL = document.getElementById('arrowLeft');
+  const arrowR = document.getElementById('arrowRight');
+  const panels = document.querySelectorAll('.panel');
+  let current = 0;
+
+  function goTo(i) {
+    current = i;
+    scroll.scrollTo({ left: i * window.innerWidth, behavior: 'smooth' });
+    updateUI();
+  }
+
+  function navigate(dir) {
+    const next = Math.max(0, Math.min(panels.length - 1, current + dir));
+    goTo(next);
+  }
+
+  function updateUI() {
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    navBtns.forEach((b, i) => b.classList.toggle('active', i === current));
+    arrowL.classList.toggle('hidden', current === 0);
+    arrowR.classList.toggle('hidden', current === panels.length - 1);
+  }
+
+  // Track scroll position
+  scroll.addEventListener('scroll', () => {
+    const i = Math.round(scroll.scrollLeft / window.innerWidth);
+    if (i !== current) { current = i; updateUI(); }
+  });
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') navigate(1);
+    if (e.key === 'ArrowLeft') navigate(-1);
+  });
+
+  // Publication tabs
+  function switchTab(tab, btn) {
+    document.querySelectorAll('.pub-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.pub-tab').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + tab).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  updateUI();
+</script>
 </body>
 </html>
