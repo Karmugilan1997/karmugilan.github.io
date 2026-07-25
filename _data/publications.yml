@@ -39,15 +39,3 @@ conferences:
     details: "Vol. 8, No. 6, pp. 953–959"
     doi_url: "https://doi.org/10.1002/cepa.70186"
     doi_label: "10.1002/cepa.70186"
-
-
-# To add a new paper, copy this block:
-# - year: "2027"
-#   type: "Journal"         # Journal / Conference / Book Chapter
-#   badge: "Q1"             # Q1 / Q2 / Best Paper / etc
-#   venue: "Journal Name"
-#   title: "Your paper title"
-#   authors: "<strong>Your Name</strong> and Co-Author"
-#   details: "Vol. X, No. Y, Month Year"
-#   doi_url: "https://doi.org/xxx"
-#   doi_label: "10.xxxx/xxxxx"

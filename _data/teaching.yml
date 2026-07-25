@@ -1,0 +1,32 @@
+# ================================================================
+# 📚 _data/teaching.yml — Teaching & Mentoring Experience
+# ✏️  Edit or add your own entries
+# ================================================================
+
+teaching:
+  - semester: "Semester, Year"
+    course:   "Course Name (Course Code)"
+    role:     "Teaching Assistant"
+    institute:"IIT Hyderabad"
+    duties:
+      - "Conducted tutorial sessions and doubt-clearing classes"
+      - "Prepared and graded assignments and quizzes"
+      - "Supported laboratory sessions"
+
+# ── HOW TO ADD MORE ─────────────────────────────────────────────
+# - semester: "Monsoon 2024"
+#   course:   "Structural Analysis (CE3101)"
+#   role:     "Teaching Assistant"
+#   institute:"IIT Hyderabad"
+#   duties:
+#     - "Conducted weekly tutorials for 60+ students"
+#     - "Graded assignments and mid-term papers"
+
+mentoring:
+  - year: "2022 – Present"
+    role: "Project Mentor"
+    desc: "Co-supervised B.Tech / M.Tech student projects on cold-formed steel and structural testing topics."
+
+# - year: "2023"
+#   role: "B.Tech Project Mentor"
+#   desc: "Guided 2 final-year students on FEM simulation using Abaqus for CFS connections."

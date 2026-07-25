@@ -1,0 +1,22 @@
+# ================================================================
+# 🏆 _data/awards.yml — Awards, Fellowships & Achievements
+# ✏️  Edit or add your own entries below
+# ================================================================
+
+- year: "2021 – Present"
+  title: "Research Fellowship"
+  body: "Ministry of Education / MHRD, Govt. of India"
+  desc: "Full-time doctoral research fellowship for PhD at IIT Hyderabad."
+
+# ── HOW TO ADD MORE ─────────────────────────────────────────────
+# Copy and fill in the block below:
+#
+# - year: "2025"
+#   title: "Best Paper Award"
+#   body:  "Conference / Journal / Institution name"
+#   desc:  "Brief description of the award or achievement."
+#
+# - year: "2024"
+#   title: "Institute Gold Medal"
+#   body:  "IIT Hyderabad"
+#   desc:  "Awarded for academic excellence during PhD programme."
