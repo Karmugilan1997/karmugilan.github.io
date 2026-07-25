@@ -1,48 +1,60 @@
 # ================================================================
-# ✏️ _config.yml — EDIT YOUR DETAILS HERE
-# git add . && git commit -m "update" && git push
+# ✏️  _config.yml — EDIT ALL YOUR DETAILS HERE
+# After any change: git add . && git commit -m "update" && git push
 # ================================================================
 
-title: "Karmugilan Panchamoorthy"
-tagline: "Structural Engineering · Cold-Formed Steel · Experimental Mechanics"
+# ── SITE ──────────────────────────────────────────────────────────
+title:       "Karmugilan Panchamoorthy"
+tagline:     "Structural Engineering · Cold-Formed Steel · Experimental Mechanics"
 description: "PhD Candidate | Structural Engineering | IIT Hyderabad"
-url: "https://karmugilan1997.github.io"
-baseurl: ""
+url:         "https://karmugilan1997.github.io"
+baseurl:     ""
 
+# ── AUTHOR ────────────────────────────────────────────────────────
 author:
-  name: "Karmugilan Panchamoorthy"
-  initials: "KP"
-  photo: "images/profile.JPG"
-  role: "PhD Candidate – Structural Engineering"
+  name:       "Karmugilan Panchamoorthy"
+  initials:   "KP"
+  photo:      "images/profile.JPG"       # ← your photo filename in images/ folder
+  role:       "PhD Candidate – Structural Engineering"
   department: "Department of Civil Engineering"
-  institution: "Indian Institute of Technology Hyderabad"
-  location: "IIT Hyderabad, India – 502284"
+  institution:"Indian Institute of Technology Hyderabad"
+  location:   "IIT Hyderabad, India – 502284"
   supervisor: "Prof. Mahendrakumar Madhavan"
-  cgpa: "9.75 / 10"
-  phone: "+91-xxxxxxxxxx"
-  email: "ce21resch11010@iith.ac.in"
-  orcid: "0009-0000-4948-1288"
+  cgpa:       "9.75 / 10"
+  phone:      "+91-8098336845"
+  email:      "ce21resch11010@iith.ac.in"
+  orcid:      "0009-0000-4948-1288"
 
-  linkedin: "https://www.linkedin.com/feed/?trk=em1-email_accept_invite_single_01-header-6-home"
-  googlescholar: "https://scholar.google.com/citations?user=X2T3ayQAAAAJ&hl=en"
-  github: "https://github.com/Karmugilan1997"
-  researchgate: "https://www.researchgate.net/profile/Karmugilan-Panchamoorthy/research"
+  # ── SOCIAL LINKS ✏️  Replace # with your actual URLs ──────────
+  linkedin:       "https://www.linkedin.com/feed/?trk=em1-email_accept_invite_single_01-header-6-home"
+  googlescholar:  "https://scholar.google.com/citations?user=X2T3ayQAAAAJ&hl=en"
+  github:         "https://github.com/Karmugilan1997"
+  researchgate:   "https://www.researchgate.net/profile/Karmugilan-Panchamoorthy/research"
 
-  bio: "PhD Candidate in Structural Engineering at IIT Hyderabad, specialising in cold-formed steel (CFS) shear wall systems under in-plane seismic loading. Research spans large-scale experimental testing, Abaqus FEM simulation, and 3D Digital Image Correlation (DIC). Supervised by Prof. Mahendrakumar Madhavan."
+  # ── BIO (shown on homepage left side) ─────────────────────────
+  bio: >
+    PhD Candidate in Structural Engineering at IIT Hyderabad,
+    specialising in cold-formed steel (CFS) shear wall systems
+    under in-plane seismic loading. Research spans large-scale
+    experimental testing, Abaqus FEM simulation, and 3D Digital
+    Image Correlation (DIC). Supervised by Prof. Mahendrakumar Madhavan.
 
-cv_file: "files/Karmugilan_CV.pdf"
+# ── CV FILE ───────────────────────────────────────────────────────
+cv_file: "files/Karmugilan_CV.pdf"   # ← upload CV to files/ folder
 
+# ── HOMEPAGE STATS (the 4 number boxes) ───────────────────────────
 stats:
   - number: "3"
-    label: "Journal Papers"
+    label:  "Journal Papers"
   - number: "1"
-    label: "Conference Paper"
+    label:  "Conference Paper"
   - number: "9.75"
-    label: "PhD CGPA"
+    label:  "PhD CGPA"
   - number: "4+"
-    label: "Years Research"
+    label:  "Years Research"
 
+# ── JEKYLL SETTINGS (do not change) ───────────────────────────────
 markdown: kramdown
-theme: minima
+theme:    minima
 plugins:
   - jekyll-feed
