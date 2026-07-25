@@ -1,0 +1,32 @@
+# ================================================================
+# 🎓 _data/education.yml
+# ✏️ Edit education and experience timeline
+# ================================================================
+
+- year: "2021 — Present"
+  role: "PhD Research Scholar — Structural Engineering"
+  place: "Indian Institute of Technology Hyderabad, India"
+  cgpa: "9.75 / 10"
+  current: true
+  points:
+    - "Thesis: Behaviour of CFS shear wall systems under in-plane cyclic shear loading"
+    - "Supervisor: Prof. Mahendrakumar Madhavan"
+    - "Large-scale experimental testing & 3D Digital Image Correlation (DIC)"
+    - "Abaqus FEM simulation and model validation"
+    - "2 peer-reviewed Q1 journal publications"
+
+- year: "2019 — 2021"
+  role: "M.E. — Structural Engineering"
+  place: "ACGCET – Karaikudi, Tamil Nadu, India"
+  cgpa: "9.71 / 10"
+  current: false
+  points:
+    - "Graduated with distinction"
+
+- year: "2015 — 2019"
+  role: "B.E. — Civil Engineering"
+  place: "Government College of Engineering, Thanjavur (Anna University)"
+  cgpa: "8.44 / 10"
+  current: false
+  points:
+    - "First Class with Distinction"

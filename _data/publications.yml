@@ -1,0 +1,35 @@
+# ================================================================
+# 📄 _data/publications.yml
+# ✏️ Add new papers by copying a block below
+# ================================================================
+
+- year: "2026"
+  type: "Journal"
+  badge: "Q1"
+  venue: "Journal of Constructional Steel Research"
+  title: "Behaviour of plywood-sheathed cold-formed steel shear walls under monotonic and cyclic in-plane shear loading"
+  authors: "<strong>Panchamoorthy, K. S.</strong> and Madhavan, M. M."
+  details: "Vol. 238, March 2026 · ISSN: 0143974X"
+  doi_url: "https://doi.org/10.1016/j.jcsr.2025.110172"
+  doi_label: "10.1016/j.jcsr.2025.110172"
+
+- year: "2025"
+  type: "Journal"
+  badge: "Q1"
+  venue: "Journal of Structural Engineering (ASCE)"
+  title: "Experimental Study of Screw Connections in Plywood-Sheathed CFS Wall Panels Subjected to In-Plane Shear Loading"
+  authors: "<strong>Panchamoorthy, K. S.</strong> and Madhavan, M. M."
+  details: "Vol. 151, No. 5, May 2025 · ISSN: 0733-9445"
+  doi_url: "https://ascelibrary.org/doi/10.1061/JSENDH.STENG-14106"
+  doi_label: "10.1061/JSENDH.STENG-14106"
+
+# To add a new paper, copy this block:
+# - year: "2027"
+#   type: "Journal"         # Journal / Conference / Book Chapter
+#   badge: "Q1"             # Q1 / Q2 / Best Paper / etc
+#   venue: "Journal Name"
+#   title: "Your paper title"
+#   authors: "<strong>Your Name</strong> and Co-Author"
+#   details: "Vol. X, No. Y, Month Year"
+#   doi_url: "https://doi.org/xxx"
+#   doi_label: "10.xxxx/xxxxx"
