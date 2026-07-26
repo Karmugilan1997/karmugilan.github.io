@@ -14,7 +14,7 @@ baseurl:     ""
 author:
   name:       "Karmugilan Panchamoorthy"
   initials:   "KP"
-  photo:      "images/profile_kar_Image.png"       # ← your photo filename in images/ folder
+  photo:      "images/profile.JPG"       # ← your photo filename in images/ folder
   role:       "PhD Candidate – Structural Engineering"
   department: "Department of Civil Engineering"
   institution: "Indian Institute of Technology Hyderabad"
@@ -40,7 +40,7 @@ author:
     Image Correlation (DIC). Supervised by Prof. Mahendrakumar Madhavan.
 
 # ── CV FILE ───────────────────────────────────────────────────────
-cv_file: "files/Karmugilan_CV.pdf"   # ← upload CV to files/ folder
+cv_file: "files/Karmugilan_CV-21062026.pdf"   # ← upload CV to files/ folder
 
 # ── HOMEPAGE STATS (the 4 number boxes) ───────────────────────────
 stats:
