@@ -1,0 +1,19 @@
+# _data/news.yml - News and Highlights
+# Add new items at the TOP so latest appears first
+
+- date: "March 2026"
+  type: "Publication"
+  text: "New paper published in Journal of Constructional Steel Research - Behaviour of plywood-sheathed CFS shear walls under monotonic and cyclic loading."
+
+- date: "May 2025"
+  type: "Publication"
+  text: "Paper published in Journal of Structural Engineering (ASCE) - Experimental Study of Screw Connections in Plywood-Sheathed CFS Wall Panels."
+
+- date: "2025"
+  type: "Conference"
+  text: "Presented research at SDSS 2025 - International Colloquium on Stability and Ductility of Steel Structures."
+
+# To add a news item, copy the block below and fill in your details:
+# - date: "Month Year"
+#   type: "Publication"
+#   text: "Your news item text here."

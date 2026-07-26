@@ -1,0 +1,42 @@
+# _data/professional.yml - Professional Activities and Memberships
+
+reviewing:
+  - role: "Peer Reviewer"
+    venues:
+      - "Journal of Constructional Steel Research (Elsevier)"
+      - "Journal of Structural Engineering (ASCE)"
+      - "Thin-Walled Structures (Elsevier)"
+
+memberships:
+  - body: "American Society of Civil Engineers (ASCE)"
+    level: "Student Member"
+    since: "2022"
+
+# To add a membership:
+# - body: "Institution of Structural Engineers (IStructE)"
+#   level: "Associate Member"
+#   since: "2023"
+
+conferences_attended:
+  - year: "2025"
+    name: "SDSS 2025 - International Colloquium on Stability and Ductility of Steel Structures"
+    location: "International"
+    role: "Presenter"
+
+# To add a conference:
+# - year: "2024"
+#   name: "Conference Name"
+#   location: "City, Country"
+#   role: "Attendee"
+
+invited_talks:
+  - year: ""
+    title: ""
+    event: ""
+    location: ""
+
+# To add a talk:
+# - year: "2025"
+#   title: "Talk title here"
+#   event: "Workshop or Seminar name"
+#   location: "Institution, City"

@@ -1,0 +1,12 @@
+# _data/awards.yml - Awards, Fellowships and Achievements
+
+- year: "2021 - Present"
+  title: "Research Fellowship"
+  body: "Ministry of Education / MHRD, Govt. of India"
+  desc: "Full-time doctoral research fellowship for PhD at IIT Hyderabad."
+
+# To add an award, copy the block below and fill in your details:
+# - year: "2025"
+#   title: "Best Paper Award"
+#   body: "Conference or Institution name"
+#   desc: "Brief description of the award."
