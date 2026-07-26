@@ -1,60 +1,582 @@
-# ================================================================
-# ✏️  _config.yml — EDIT ALL YOUR DETAILS HERE
-# After any change: git add . && git commit -m "update" && git push
-# ================================================================
+---
+layout: null
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{ site.author.name }} | {{ site.author.institution }}</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:      #eef1f6;
+      --white:   #f8fafc;
+      --border:  #dde2ec;
+      --border2: #c4cad8;
+      --navy:    #1a3558;
+      --navy2:   #12284a;
+      --navy3:   #0e1e38;
+      --navy-l:  #e8eef7;
+      --navy-ll: #f0f4fa;
+      --teal:    #1a5c4a;
+      --ink:     #1a1a20;
+      --ink2:    #2c2c36;
+      --body:    #3a3a44;
+      --muted:   #68687a;
+      --muted2:  #9898a8;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html,body{height:100%;overflow:hidden;}
+    body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--body);font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased;}
+    ::-webkit-scrollbar{width:3px;height:3px;}::-webkit-scrollbar-thumb{background:var(--navy);border-radius:2px;}
+    .h-scroll{display:flex;width:100vw;height:100vh;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-behavior:smooth;}
+    .h-scroll::-webkit-scrollbar{height:2px;}
+    .h-scroll::-webkit-scrollbar-thumb{background:var(--navy);}
+    .panel{min-width:100vw;height:100vh;scroll-snap-align:start;display:flex;flex-direction:column;position:relative;overflow:hidden;}
 
-# ── SITE ──────────────────────────────────────────────────────────
-title:       "Karmugilan Panchamoorthy"
-tagline:     "Structural Engineering · Cold-Formed Steel · Experimental Mechanics"
-description: "PhD Candidate | Structural Engineering | IIT Hyderabad"
-url:         "https://karmugilan1997.github.io"
-baseurl:     ""
+    /* ── TOPBAR ── */
+    .topbar{
+      position:fixed;top:0;left:0;right:0;z-index:100;height:58px;
+      background:rgba(238,241,246,0.97);backdrop-filter:blur(20px);
+      border-bottom:2px solid var(--navy);   /* navy bottom border */
+      display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;
+    }
+    .logo{display:flex;align-items:center;gap:0.75rem;text-decoration:none;}
+    /* Teal badge — different from navy body */
+    .logo-badge{width:34px;height:34px;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:1rem;flex-shrink:0;}
+    .logo-name{font-family:'DM Serif Display',serif;font-size:0.95rem;color:var(--ink);line-height:1.2;white-space:nowrap;}
+    .logo-sub{font-family:'DM Sans',sans-serif;font-size:0.6rem;color:var(--muted);letter-spacing:0.02em;}
+    .topbar-nav{display:flex;}
+    .nav-btn{font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:500;color:var(--muted);background:none;border:none;cursor:pointer;padding:0 0.95rem;height:58px;transition:color 0.2s;position:relative;}
+    .nav-btn::after{content:'';position:absolute;bottom:0;left:10%;right:10%;height:2px;background:var(--teal);transform:scaleX(0);transition:transform 0.3s;}
+    .nav-btn:hover{color:var(--ink);}
+    .nav-btn.active{color:var(--navy);font-weight:600;}
+    .nav-btn.active::after{transform:scaleX(1);}
 
-# ── AUTHOR ────────────────────────────────────────────────────────
-author:
-  name:       "Karmugilan Panchamoorthy"
-  initials:   "KP"
-  photo:      "images/Profile_kar_Image.png"       # ← your photo filename in images/ folder
-  role:       "PhD Candidate – Structural Engineering"
-  department: "Department of Civil Engineering"
-  institution: "Indian Institute of Technology Hyderabad"
-  location:   "IIT Hyderabad, India – 502284"
-  supervisor: "Prof. Mahendrakumar Madhavan"
-  cgpa:       "9.75 / 10"
-  phone:      "+91-8098336845"
-  email:      "ce21resch11010@iith.ac.in"
-  orcid:      "0009-0000-4948-1288"
+    /* ── ARROWS ── */
+    .arrow{position:fixed;top:50%;z-index:200;transform:translateY(-50%);color:var(--muted2);font-size:1.5rem;width:26px;height:80px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.35s;background:none;border:none;opacity:0.2;}
+    .arrow:hover{opacity:0.7;color:var(--navy);}
+    .arrow.left{left:0.1rem;}.arrow.right{right:0.1rem;}
+    .arrow.hidden{opacity:0;pointer-events:none;}
 
-  # ── SOCIAL LINKS ✏️  Replace # with your actual URLs ──────────
-  linkedin:       "https://www.linkedin.com/feed/?trk=em1-email_accept_invite_single_01-header-6-home"
-  googlescholar:  "https://scholar.google.com/citations?user=X2T3ayQAAAAJ&hl=en"
-  github:         "https://github.com/Karmugilan1997"
-  researchgate:   "https://www.researchgate.net/profile/Karmugilan-Panchamoorthy/research"
+    /* ── DOTS ── */
+    .nav-dots{position:fixed;bottom:1.4rem;left:50%;transform:translateX(-50%);display:flex;gap:0.45rem;z-index:300;}
+    .dot{width:5px;height:5px;border-radius:50%;background:var(--border2);border:none;cursor:pointer;transition:all 0.35s;padding:0;}
+    .dot.active{background:var(--navy);width:20px;border-radius:3px;}
 
-  # ── BIO (shown on homepage left side) ─────────────────────────
-  bio: >
-    PhD Candidate in Structural Engineering at IIT Hyderabad,
-    specialising in cold-formed steel (CFS) shear wall systems
-    under in-plane seismic loading. Research spans large-scale
-    experimental testing, Abaqus FEM simulation, and 3D Digital
-    Image Correlation (DIC). Supervised by Prof. Mahendrakumar Madhavan.
+    /* ── SECTION LABEL — no numbers ── */
+    .sec-label{position:absolute;top:74px;left:4rem;font-family:'DM Mono',monospace;font-size:0.58rem;color:var(--teal);letter-spacing:0.2em;text-transform:uppercase;display:flex;align-items:center;gap:0.65rem;opacity:0.75;}
+    .sec-label::after{content:'';width:28px;height:1px;background:var(--teal);}
 
-# ── CV FILE ───────────────────────────────────────────────────────
-cv_file: "files/Karmugilan_CV-21062026.pdf"   # ← upload CV to files/ folder
+    /* ═══ HOME ═══ */
+    #panel-home{flex-direction:row;background:var(--bg);}
+    .home-left{flex:1;overflow-y:auto;display:flex;flex-direction:column;justify-content:center;padding:4rem 3rem 4rem 6%;min-width:0;}
+    .home-left::-webkit-scrollbar{width:2px;}
 
-# ── HOMEPAGE STATS (the 4 number boxes) ───────────────────────────
-stats:
-  - number: "3"
-    label:  "Journal Papers"
-  - number: "1"
-    label:  "Conference Paper"
-  - number: "9.75"
-    label:  "PhD CGPA"
-  - number: "4+"
-    label:  "Years Research"
+    /* name — never hides on any screen */
+    .hero-name{font-family:'DM Serif Display',serif;font-weight:400;line-height:1.02;color:var(--ink);letter-spacing:-0.02em;margin-bottom:0.85rem;word-break:break-word;overflow-wrap:anywhere;}
+    .fn{font-size:clamp(1.8rem,3.5vw,4.2rem);display:block;}
+    .ln{font-size:clamp(1.8rem,3.5vw,4.2rem);display:block;color:var(--navy);}
 
-# ── JEKYLL SETTINGS (do not change) ───────────────────────────────
-markdown: kramdown
-theme:    minima
-plugins:
-  - jekyll-feed
+    .hero-role{font-family:'DM Serif Display',serif;font-style:italic;font-size:clamp(0.95rem,1.3vw,1.3rem);color:var(--muted);margin-bottom:0.2rem;line-height:1.3;}
+    .hero-dept{font-family:'DM Sans',sans-serif;font-size:clamp(0.78rem,1vw,0.9rem);color:var(--muted);margin-bottom:1.6rem;font-weight:400;line-height:1.5;}
+    .rule{width:38px;height:2px;background:var(--teal);margin-bottom:1.4rem;opacity:0.8;}
+    .hero-bio{font-size:clamp(0.88rem,1.1vw,1rem);color:var(--body);line-height:1.95;max-width:540px;margin-bottom:2rem;padding-left:1.1rem;border-left:2px solid var(--navy);}
+    .hero-bio strong{color:var(--ink);font-weight:600;}
+
+    .stat-row{display:inline-flex;margin-bottom:1.8rem;border:1px solid var(--border);}
+    .stat-box{text-align:center;padding:0.8rem 1.3rem;min-width:85px;border-right:1px solid var(--border);}
+    .stat-box:last-child{border-right:none;}
+    .stat-n{font-family:'DM Serif Display',serif;font-size:1.85rem;color:var(--navy);display:block;line-height:1;}
+    .stat-l{font-family:'DM Mono',monospace;font-size:0.46rem;color:var(--muted2);text-transform:uppercase;letter-spacing:0.08em;margin-top:0.22rem;}
+
+    .cta-row{display:flex;gap:0.55rem;flex-wrap:wrap;margin-bottom:1.4rem;}
+    .btn{font-family:'DM Sans',sans-serif;font-weight:600;font-size:0.78rem;padding:0.65rem 1.4rem;text-decoration:none;cursor:pointer;border:none;transition:all 0.2s;display:inline-block;}
+    .btn-navy{background:var(--navy);color:#fff;}.btn-navy:hover{background:var(--navy2);}
+    .btn-teal{background:var(--teal);color:#fff;}.btn-teal:hover{background:#144d3e;}
+    .btn-outline{background:transparent;color:var(--ink2);border:1px solid var(--border2);}.btn-outline:hover{border-color:var(--navy);color:var(--navy);}
+
+    .social-row{display:flex;gap:0.38rem;flex-wrap:wrap;}
+    .soc{font-family:'DM Sans',sans-serif;font-size:0.72rem;font-weight:500;padding:0.26rem 0.72rem;color:var(--muted);border:1px solid var(--border);text-decoration:none;transition:all 0.2s;background:var(--white);}
+    .soc:hover{color:var(--navy);border-color:var(--navy);}
+
+    /* ── PROFILE CARD — moved left ── */
+    .home-right{
+      width:280px;flex-shrink:0;
+      display:flex;align-items:center;justify-content:center;
+      padding:68px 1rem 2rem 0; /* reduced right padding = card moves left */
+    }
+    .profile-card{width:255px;background:var(--navy);box-shadow:0 8px 40px rgba(14,30,56,0.2);overflow:hidden;}
+    .card-photo-wrap{background:var(--navy2);padding:1.6rem 1.6rem 1.1rem;display:flex;flex-direction:column;align-items:center;border-bottom:1px solid rgba(255,255,255,0.08);}
+    .card-avatar{width:120px;height:120px;border-radius:50%;overflow:hidden;border:3px solid rgba(255,255,255,0.2);margin-bottom:0.9rem;flex-shrink:0;background:var(--navy3);}
+    .card-avatar img{width:100%;height:100%;object-fit:cover;object-position:center 10%;display:block;}
+    .card-avatar-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:2.8rem;color:rgba(255,255,255,0.6);}
+    .card-pre{font-family:'DM Sans',sans-serif;font-size:0.65rem;color:rgba(255,255,255,0.55);margin-bottom:0.25rem;text-align:center;font-weight:500;}
+    .card-name{font-family:'DM Serif Display',serif;font-size:1.05rem;color:#fff;text-align:center;line-height:1.25;margin-bottom:0.18rem;}
+    .card-role{font-family:'DM Sans',sans-serif;font-size:0.65rem;color:rgba(255,255,255,0.55);text-align:center;font-weight:400;}
+
+    /* info rows — bigger text */
+    .card-body{padding:0.2rem 0;}
+    .card-row{display:flex;align-items:flex-start;gap:0.65rem;padding:0.58rem 1.15rem;border-bottom:1px dotted rgba(255,255,255,0.1);transition:background 0.2s;}
+    .card-row:hover{background:rgba(255,255,255,0.04);}
+    .cr-icon{color:rgba(255,255,255,0.38);flex-shrink:0;font-size:0.78rem;margin-top:0.22rem;}
+    .cr-lbl{font-family:'DM Mono',monospace;font-size:0.5rem;color:rgba(255,255,255,0.38);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.08rem;}
+    .cr-val{font-size:0.82rem;color:rgba(255,255,255,0.85);line-height:1.4;font-weight:400;}  /* bigger */
+    .cr-val a{color:rgba(255,255,255,0.85);text-decoration:none;}
+    .cr-val a:hover{color:#fff;}
+    .card-socials{padding:0.6rem 1.15rem 0.8rem;display:flex;flex-wrap:wrap;gap:0.3rem;border-top:1px solid rgba(255,255,255,0.08);}
+    .card-soc{font-family:'DM Sans',sans-serif;font-size:0.65rem;font-weight:500;padding:0.22rem 0.6rem;color:rgba(255,255,255,0.65);border:1px solid rgba(255,255,255,0.18);background:transparent;text-decoration:none;transition:all 0.2s;}
+    .card-soc:hover{background:rgba(255,255,255,0.1);color:#fff;border-color:rgba(255,255,255,0.35);}
+
+    /* ═══ SHARED PANEL ═══ */
+    .panel-inner{flex:1;overflow-y:auto;overflow-x:hidden;padding:5.2rem 4rem 2.5rem 6%;display:flex;flex-direction:column;}
+    .panel-inner::-webkit-scrollbar{width:2px;}
+    .panel-inner::-webkit-scrollbar-thumb{background:var(--navy);}
+    .panel-title{font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,3vw,2.8rem);font-weight:400;color:var(--ink);line-height:1.1;margin-bottom:0.35rem;}
+    .panel-sub{font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--muted2);letter-spacing:0.1em;text-transform:uppercase;}
+    .title-rule{display:flex;align-items:center;gap:0.65rem;margin:0.9rem 0 2rem;}
+    .tr-line{width:38px;height:2px;background:var(--teal);opacity:0.8;}
+    .tr-dot{width:5px;height:5px;background:var(--teal);border-radius:50%;}
+
+    /* ═══ RESEARCH — no numbers, natural card height ═══ */
+    #panel-research{background:var(--bg);}
+    .research-grid{
+      display:grid;grid-template-columns:repeat(3,1fr);
+      gap:1px;background:var(--border);
+      /* natural height — no flex:1 stretch */
+      align-content:start;
+    }
+    .rc{background:var(--white);padding:1.6rem 1.8rem;transition:all 0.3s;border-bottom:3px solid transparent;min-height:0;}
+    .rc:hover{background:var(--navy-ll);border-bottom-color:var(--teal);}
+    /* no .rc-num anymore */
+    .rc-title{font-family:'DM Serif Display',serif;font-size:1.05rem;color:var(--ink);margin-bottom:0.45rem;line-height:1.3;}
+    .rc-desc{font-size:0.86rem;color:var(--muted);line-height:1.75;}
+    /* teal left accent instead of numbers */
+    .rc-accent{width:24px;height:2px;background:var(--teal);margin-bottom:0.75rem;opacity:0.6;}
+
+    /* ═══ PUBLICATIONS ═══ */
+    #panel-publications{background:var(--bg);}
+    .pub-tabs{display:flex;margin-bottom:1.8rem;border-bottom:1px solid var(--border);}
+    .pub-tab{font-family:'DM Sans',sans-serif;font-weight:500;font-size:0.83rem;color:var(--muted);background:none;border:none;cursor:pointer;padding:0.6rem 1.4rem;position:relative;transition:color 0.2s;}
+    .pub-tab::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:2px;background:var(--teal);transform:scaleX(0);transition:transform 0.3s;}
+    .pub-tab.active{color:var(--navy);}
+    .pub-tab.active::after{transform:scaleX(1);}
+    .pub-section{display:none;flex-direction:column;gap:1rem;}
+    .pub-section.active{display:flex;}
+    .pub-card{padding:1.4rem 1.8rem;background:var(--white);border:1px solid var(--border);border-left:3px solid var(--navy);transition:all 0.25s;}
+    .pub-card:hover{border-left-color:var(--teal);background:var(--navy-ll);}
+    .pub-top{display:flex;align-items:center;gap:0.7rem;flex-wrap:wrap;margin-bottom:0.55rem;}
+    .pub-yr{font-family:'DM Serif Display',serif;font-size:1rem;color:var(--navy);}
+    .pub-badge{font-family:'DM Mono',monospace;font-size:0.5rem;padding:0.1rem 0.5rem;background:var(--navy-l);color:var(--navy);border:1px solid rgba(26,53,88,0.2);}
+    .pub-v{font-size:0.78rem;color:var(--muted);font-style:italic;}
+    .pub-title{font-family:'DM Serif Display',serif;font-size:1.02rem;color:var(--ink);line-height:1.5;margin-bottom:0.28rem;}
+    .pub-authors{font-size:0.82rem;color:var(--muted);margin-bottom:0.22rem;}
+    .pub-authors strong{color:var(--ink2);font-weight:600;}
+    .pub-details{font-size:0.74rem;color:var(--muted2);font-style:italic;margin-bottom:0.58rem;}
+    .pub-links{display:flex;gap:0.4rem;}
+    .pub-link{font-family:'DM Sans',sans-serif;font-size:0.7rem;font-weight:500;color:var(--navy);text-decoration:none;padding:0.18rem 0.6rem;border:1px solid rgba(26,53,88,0.28);transition:all 0.2s;}
+    .pub-link:hover{background:var(--navy);color:#fff;border-color:var(--navy);}
+
+    /* ═══ SKILLS — no empty space ═══ */
+    #panel-skills{background:var(--bg);}
+    .skills-grid{
+      display:grid;grid-template-columns:repeat(2,1fr);
+      gap:1px;background:var(--border);
+      align-content:start; /* no stretch */
+    }
+    .skill-card{background:var(--white);padding:1.6rem 2rem;transition:background 0.25s;}
+    .skill-card:hover{background:var(--navy-ll);}
+    .skill-head{font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--ink);margin-bottom:1rem;padding-bottom:0.6rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:0.6rem;}
+    .sh-icon{font-size:1rem;color:var(--teal);}
+    .skill-tags{display:flex;flex-wrap:wrap;gap:0.4rem;}
+    .skill-tag{font-family:'DM Sans',sans-serif;font-size:0.76rem;padding:0.26rem 0.72rem;color:var(--muted);border:1px solid var(--border);background:var(--bg);transition:all 0.2s;}
+    .skill-tag:hover{color:var(--navy);border-color:var(--navy);background:var(--navy-l);}
+
+    /* ═══ EDUCATION ═══ */
+    #panel-education{background:var(--bg);}
+    .timeline{position:relative;padding-left:2.2rem;}
+    .timeline::before{content:'';position:absolute;left:0;top:10px;bottom:0;width:1px;background:linear-gradient(var(--navy),transparent);opacity:0.18;}
+    .tl-item{position:relative;margin-bottom:2.2rem;}
+    .tl-dot{position:absolute;left:-2.55rem;top:0.4rem;width:10px;height:10px;border-radius:50%;background:var(--bg);border:2px solid var(--border2);}
+    .tl-dot.active{border-color:var(--teal);background:var(--teal);box-shadow:0 0 0 4px rgba(26,92,74,0.12);}
+    .tl-year{font-family:'DM Mono',monospace;font-size:0.58rem;color:var(--teal);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.28rem;opacity:0.9;}
+    .tl-role{font-family:'DM Serif Display',serif;font-size:1.25rem;color:var(--ink);margin-bottom:0.15rem;}
+    .tl-place{font-size:0.86rem;color:var(--muted);margin-bottom:0.38rem;}
+    .tl-cgpa{display:inline-block;font-family:'DM Mono',monospace;font-size:0.56rem;color:var(--teal);border:1px solid rgba(26,92,74,0.3);padding:0.1rem 0.58rem;margin-bottom:0.58rem;background:rgba(26,92,74,0.06);}
+    .tl-pts{list-style:none;}
+    .tl-pts li{font-size:0.84rem;color:var(--muted);line-height:1.78;padding-left:1rem;position:relative;margin-bottom:0.14rem;}
+    .tl-pts li::before{content:'';position:absolute;left:0;top:0.62rem;width:6px;height:1px;background:var(--teal);opacity:0.5;}
+
+    /* ═══ ACTIVITIES ═══ */
+    #panel-activities{background:var(--bg);}
+    .act-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);align-content:start;}
+    .act-col{background:var(--white);padding:1.6rem 2rem;overflow-y:auto;}
+    .act-col::-webkit-scrollbar{width:2px;}
+    .act-col-title{font-family:'DM Serif Display',serif;font-size:1.05rem;color:var(--ink);margin-bottom:1rem;padding-bottom:0.6rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:0.5rem;}
+    .award-item{margin-bottom:1.2rem;padding-bottom:1rem;border-bottom:1px solid var(--border);}
+    .award-item:last-child{border-bottom:none;margin-bottom:0;}
+    .award-year{font-family:'DM Mono',monospace;font-size:0.54rem;color:var(--teal);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.18rem;}
+    .award-title{font-family:'DM Serif Display',serif;font-size:0.98rem;color:var(--ink);margin-bottom:0.12rem;}
+    .award-body{font-size:0.78rem;color:var(--muted);margin-bottom:0.2rem;font-style:italic;}
+    .award-desc{font-size:0.78rem;color:var(--muted);}
+    .teach-item{margin-bottom:1.1rem;padding-bottom:0.9rem;border-bottom:1px solid var(--border);}
+    .teach-item:last-child{border-bottom:none;margin-bottom:0;}
+    .teach-meta{font-family:'DM Mono',monospace;font-size:0.52rem;color:var(--teal);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.26rem;}
+    .teach-course{font-family:'DM Serif Display',serif;font-size:0.96rem;color:var(--ink);margin-bottom:0.12rem;}
+    .teach-role{font-size:0.76rem;color:var(--muted);margin-bottom:0.35rem;}
+    .teach-duties{list-style:none;}
+    .teach-duties li{font-size:0.76rem;color:var(--muted);line-height:1.7;padding-left:0.85rem;position:relative;margin-bottom:0.08rem;}
+    .teach-duties li::before{content:'';position:absolute;left:0;top:0.58rem;width:5px;height:1px;background:var(--teal);opacity:0.4;}
+    .review-list{list-style:none;}
+    .review-list li{font-size:0.84rem;color:var(--body);padding:0.42rem 0;border-bottom:1px dotted var(--border);line-height:1.5;}
+    .review-list li:last-child{border-bottom:none;}
+    .tag-list{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:0.9rem;}
+    .act-tag{font-family:'DM Sans',sans-serif;font-size:0.72rem;padding:0.24rem 0.68rem;color:var(--navy);border:1px solid rgba(26,53,88,0.28);background:var(--navy-l);}
+    .conf-item{display:flex;align-items:flex-start;gap:0.75rem;padding:0.45rem 0;border-bottom:1px dotted var(--border);}
+    .conf-item:last-child{border-bottom:none;}
+    .conf-year{font-family:'DM Mono',monospace;font-size:0.54rem;color:var(--teal);flex-shrink:0;margin-top:0.1rem;}
+    .conf-name{font-size:0.8rem;color:var(--body);line-height:1.45;flex:1;}
+    .conf-role{font-family:'DM Mono',monospace;font-size:0.5rem;color:var(--muted);flex-shrink:0;margin-top:0.12rem;}
+
+    /* ═══ CONTACT ═══ */
+    #panel-contact{background:var(--bg);}
+    .contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:3rem;flex:1;align-items:start;}
+    .contact-intro{font-size:0.98rem;color:var(--body);line-height:1.95;margin-bottom:1.6rem;}
+    .contact-intro a{color:var(--teal);text-decoration:none;}
+    .contact-intro a:hover{text-decoration:underline;}
+    .contact-cards{display:flex;flex-direction:column;}
+    .cc{display:flex;align-items:flex-start;gap:0.85rem;padding:0.8rem 1.1rem;border:1px solid var(--border);border-top:none;background:var(--white);transition:background 0.2s;}
+    .cc:first-child{border-top:1px solid var(--border);}
+    .cc:hover{background:var(--navy-ll);}
+    .cc-icon{font-size:0.9rem;flex-shrink:0;margin-top:0.25rem;}
+    .cc-lbl{font-family:'DM Mono',monospace;font-size:0.48rem;color:var(--teal);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.1rem;opacity:0.8;}
+    .cc-val{font-size:0.84rem;color:var(--ink2);}
+    .cc-val a{color:var(--ink2);text-decoration:none;}
+    .cc-val a:hover{color:var(--teal);}
+    .loc-box{border:1px solid var(--border);overflow:hidden;background:var(--white);}
+    .loc-top{background:var(--navy3);color:#fff;padding:1.6rem 1.8rem;}
+    .loc-pre{font-family:'DM Mono',monospace;font-size:0.5rem;color:rgba(255,255,255,0.42);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.4rem;}
+    .loc-name{font-family:'DM Serif Display',serif;font-size:1.25rem;margin-bottom:0.25rem;}
+    .loc-dept{font-size:0.82rem;opacity:0.68;line-height:1.5;}
+    .loc-body{padding:1.3rem 1.8rem;}
+    .loc-addr{font-size:0.84rem;color:var(--muted);line-height:1.85;margin-bottom:1.3rem;}
+    .loc-links{display:flex;gap:0.55rem;flex-wrap:wrap;}
+
+    /* ─── RESPONSIVE ─── */
+    @media(max-width:1100px){
+      .home-right{width:255px;padding-right:0.5rem;}
+      .profile-card{width:235px;}
+      .card-avatar{width:105px;height:105px;}
+    }
+    @media(max-width:960px){
+      html,body{overflow:auto;}
+      .h-scroll{flex-direction:column;overflow-x:hidden;overflow-y:auto;height:auto;}
+      .panel{min-width:100vw;height:auto;min-height:auto;scroll-snap-align:none;}
+      #panel-home{flex-direction:column;height:auto;}
+      .home-left{padding:4.2rem 1.4rem 1.8rem;justify-content:flex-start;}
+      /* name always visible */
+      .fn,.ln{font-size:clamp(1.8rem,7vw,3rem);}
+      .home-right{width:100%;padding:0 1.4rem 2rem;justify-content:flex-start;}
+      .profile-card{max-width:280px;}
+      .research-grid{grid-template-columns:1fr 1fr;}
+      .skills-grid,.act-grid{grid-template-columns:1fr;}
+      .contact-wrap{grid-template-columns:1fr;gap:1.8rem;}
+      .panel-inner{padding:3.8rem 1.4rem 2.5rem;}
+      .arrow{display:none;}.nav-dots{display:none;}
+    }
+    @media(max-width:600px){
+      .research-grid{grid-template-columns:1fr;}
+      .topbar-nav{display:none;}
+      .home-left{padding:3.8rem 1.1rem 1.5rem;}
+      .fn,.ln{font-size:clamp(1.6rem,9vw,2.5rem);}
+      .logo-name{font-size:0.82rem;}
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="#" class="logo" onclick="goTo(0)">
+    <div class="logo-badge">KP</div>
+    <div>
+      <div class="logo-name">Karmugilan Panchamoorthy</div>
+      <div class="logo-sub">PhD Candidate · IIT Hyderabad</div>
+    </div>
+  </a>
+  <div class="topbar-nav">
+    <button class="nav-btn active" onclick="goTo(0)">Home</button>
+    <button class="nav-btn" onclick="goTo(1)">Research</button>
+    <button class="nav-btn" onclick="goTo(2)">Publications</button>
+    <button class="nav-btn" onclick="goTo(3)">Skills</button>
+    <button class="nav-btn" onclick="goTo(4)">Education</button>
+    <button class="nav-btn" onclick="goTo(5)">Activities</button>
+    <button class="nav-btn" onclick="goTo(6)">Contact</button>
+  </div>
+</div>
+
+<button class="arrow left hidden" id="arrowLeft" onclick="navigate(-1)">&#8249;</button>
+<button class="arrow right" id="arrowRight" onclick="navigate(1)">&#8250;</button>
+
+<div class="nav-dots">
+  <button class="dot active" onclick="goTo(0)"></button>
+  <button class="dot" onclick="goTo(1)"></button>
+  <button class="dot" onclick="goTo(2)"></button>
+  <button class="dot" onclick="goTo(3)"></button>
+  <button class="dot" onclick="goTo(4)"></button>
+  <button class="dot" onclick="goTo(5)"></button>
+  <button class="dot" onclick="goTo(6)"></button>
+</div>
+
+<div class="h-scroll" id="hscroll">
+
+  <!-- HOME — no greeting line -->
+  <div class="panel" id="panel-home">
+    <div class="home-left">
+      <h1 class="hero-name">
+        <span class="fn">Karmugilan</span>
+        <span class="ln">Panchamoorthy</span>
+      </h1>
+      <p class="hero-role">{{ site.author.role }}</p>
+      <p class="hero-dept">{{ site.author.department }} &nbsp;·&nbsp; {{ site.author.institution }}</p>
+      <div class="rule"></div>
+      <p class="hero-bio">{{ site.author.bio }}</p>
+      <div class="stat-row">
+        {% for s in site.stats %}<div class="stat-box"><span class="stat-n">{{ s.number }}</span><span class="stat-l">{{ s.label }}</span></div>{% endfor %}
+      </div>
+      <div class="cta-row">
+        <button class="btn btn-navy" onclick="goTo(2)">View Publications</button>
+        <a href="{{ site.cv_file }}" class="btn btn-outline" target="_blank">Download CV</a>
+        <button class="btn btn-outline" onclick="goTo(6)">Contact</button>
+      </div>
+      <div class="social-row">
+        <a href="mailto:{{ site.author.email }}" class="soc">Email</a>
+        {% if site.author.linkedin %}<a href="{{ site.author.linkedin }}" class="soc" target="_blank">LinkedIn</a>{% endif %}
+        {% if site.author.googlescholar %}<a href="{{ site.author.googlescholar }}" class="soc" target="_blank">Google Scholar</a>{% endif %}
+        {% if site.author.researchgate %}<a href="{{ site.author.researchgate }}" class="soc" target="_blank">ResearchGate</a>{% endif %}
+        {% if site.author.orcid %}<a href="https://orcid.org/{{ site.author.orcid }}" class="soc" target="_blank">ORCID</a>{% endif %}
+      </div>
+    </div>
+
+    <div class="home-right">
+      <div class="profile-card">
+        <div class="card-photo-wrap">
+          <div class="card-avatar">
+            {% if site.author.photo %}<img src="{{ site.author.photo }}" alt="{{ site.author.name }}" onerror="this.parentElement.innerHTML='<div class=\'card-avatar-ph\'>KP</div>'">
+            {% else %}<div class="card-avatar-ph">KP</div>{% endif %}
+          </div>
+          <div class="card-pre">PhD Candidate</div>
+          <div class="card-name">{{ site.author.name }}</div>
+          <div class="card-role">{{ site.author.department }}</div>
+        </div>
+        <div class="card-body">
+          <div class="card-row"><span class="cr-icon">🏛</span><div><div class="cr-lbl">Institution</div><div class="cr-val">{{ site.author.institution }}</div></div></div>
+          <div class="card-row"><span class="cr-icon">🔬</span><div><div class="cr-lbl">Supervisor</div><div class="cr-val">{{ site.author.supervisor }}</div></div></div>
+          <div class="card-row"><span class="cr-icon">🎓</span><div><div class="cr-lbl">PhD CGPA</div><div class="cr-val">{{ site.author.cgpa }}</div></div></div>
+          <div class="card-row"><span class="cr-icon">📍</span><div><div class="cr-lbl">Location</div><div class="cr-val">{{ site.author.location }}</div></div></div>
+          {% if site.author.orcid %}<div class="card-row"><span class="cr-icon">🆔</span><div><div class="cr-lbl">ORCID</div><div class="cr-val"><a href="https://orcid.org/{{ site.author.orcid }}" target="_blank">{{ site.author.orcid }}</a></div></div></div>{% endif %}
+          <div class="card-row"><span class="cr-icon">✉️</span><div><div class="cr-lbl">Email</div><div class="cr-val"><a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a></div></div></div>
+        </div>
+        <div class="card-socials">
+          {% if site.author.googlescholar %}<a href="{{ site.author.googlescholar }}" class="card-soc" target="_blank">Google Scholar</a>{% endif %}
+          {% if site.author.researchgate %}<a href="{{ site.author.researchgate }}" class="card-soc" target="_blank">ResearchGate</a>{% endif %}
+          {% if site.author.linkedin %}<a href="{{ site.author.linkedin }}" class="card-soc" target="_blank">LinkedIn</a>{% endif %}
+          {% if site.author.orcid %}<a href="https://orcid.org/{{ site.author.orcid }}" class="card-soc" target="_blank">ORCID</a>{% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESEARCH — no numbers, natural height -->
+  <div class="panel" id="panel-research">
+    <div class="sec-label">Research</div>
+    <div class="panel-inner">
+      <h2 class="panel-title">Areas of Research Interest</h2>
+      <p class="panel-sub">Structural Engineering · Cold-Formed Steel · Experimental & Computational Mechanics</p>
+      <div class="title-rule"><div class="tr-line"></div><div class="tr-dot"></div></div>
+      <div class="research-grid">
+        {% for item in site.data.research %}
+        <div class="rc">
+          <div class="rc-accent"></div>
+          <div class="rc-title">{{ item.title }}</div>
+          <div class="rc-desc">{{ item.desc }}</div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <!-- PUBLICATIONS -->
+  <div class="panel" id="panel-publications">
+    <div class="sec-label">Publications</div>
+    <div class="panel-inner">
+      <h2 class="panel-title">Research Publications</h2>
+      <p class="panel-sub">Peer-reviewed journals & conference proceedings</p>
+      <div class="title-rule"><div class="tr-line"></div><div class="tr-dot"></div></div>
+      <div class="pub-tabs">
+        <button class="pub-tab active" onclick="switchTab('journals',this)">Journal Articles &nbsp;({{ site.data.publications.journals.size }})</button>
+        <button class="pub-tab" onclick="switchTab('conferences',this)">Conference Proceedings &nbsp;({{ site.data.publications.conferences.size }})</button>
+      </div>
+      <div class="pub-section active" id="tab-journals">
+        {% for pub in site.data.publications.journals %}
+        <div class="pub-card">
+          <div class="pub-top"><span class="pub-yr">{{ pub.year }}</span><span class="pub-badge">{{ pub.badge }}</span><span class="pub-v">{{ pub.venue }}</span></div>
+          <div class="pub-title">{{ pub.title }}</div>
+          <div class="pub-authors">{{ pub.authors }}</div>
+          {% if pub.details %}<div class="pub-details">{{ pub.details }}</div>{% endif %}
+          <div class="pub-links">{% if pub.doi_url %}<a href="{{ pub.doi_url }}" class="pub-link" target="_blank">DOI ↗</a><a href="{{ pub.doi_url }}" class="pub-link" target="_blank">Full Paper ↗</a>{% endif %}</div>
+        </div>{% endfor %}
+      </div>
+      <div class="pub-section" id="tab-conferences">
+        {% for pub in site.data.publications.conferences %}
+        <div class="pub-card">
+          <div class="pub-top"><span class="pub-yr">{{ pub.year }}</span><span class="pub-badge">{{ pub.badge }}</span><span class="pub-v">{{ pub.venue }}</span></div>
+          <div class="pub-title">{{ pub.title }}</div>
+          <div class="pub-authors">{{ pub.authors }}</div>
+          {% if pub.details %}<div class="pub-details">{{ pub.details }}</div>{% endif %}
+          <div class="pub-links">{% if pub.doi_url %}<a href="{{ pub.doi_url }}" class="pub-link" target="_blank">DOI ↗</a>{% endif %}</div>
+        </div>{% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILLS — no empty space -->
+  <div class="panel" id="panel-skills">
+    <div class="sec-label">Skills</div>
+    <div class="panel-inner">
+      <h2 class="panel-title">Core Competencies</h2>
+      <p class="panel-sub">Experimental · Numerical · Programming · Design Codes</p>
+      <div class="title-rule"><div class="tr-line"></div><div class="tr-dot"></div></div>
+      <div class="skills-grid">
+        {% for group in site.data.skills %}
+        <div class="skill-card">
+          <div class="skill-head"><span class="sh-icon">{{ group.icon }}</span><span>{{ group.group }}</span></div>
+          <div class="skill-tags">{% for tag in group.tags %}<span class="skill-tag">{{ tag }}</span>{% endfor %}</div>
+        </div>{% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="panel" id="panel-education">
+    <div class="sec-label">Education</div>
+    <div class="panel-inner">
+      <h2 class="panel-title">Academic Background</h2>
+      <p class="panel-sub">IIT Hyderabad · ACGCET · Anna University</p>
+      <div class="title-rule"><div class="tr-line"></div><div class="tr-dot"></div></div>
+      <div class="timeline">
+        {% for edu in site.data.education %}
+        <div class="tl-item">
+          <div class="tl-dot {% if edu.current %}active{% endif %}"></div>
+          <div class="tl-year">{{ edu.year }}</div>
+          <div class="tl-role">{{ edu.role }}</div>
+          <div class="tl-place">{{ edu.place }}</div>
+          <div class="tl-cgpa">CGPA {{ edu.cgpa }}</div>
+          {% if edu.points %}<ul class="tl-pts">{% for p in edu.points %}<li>{{ p }}</li>{% endfor %}</ul>{% endif %}
+        </div>{% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <!-- ACTIVITIES -->
+  <div class="panel" id="panel-activities">
+    <div class="sec-label">Activities</div>
+    <div class="panel-inner">
+      <h2 class="panel-title">Professional Activities</h2>
+      <p class="panel-sub">Awards · Teaching · Reviewing · Memberships · Conferences</p>
+      <div class="title-rule"><div class="tr-line"></div><div class="tr-dot"></div></div>
+      <div class="act-grid">
+        <div class="act-col">
+          <div class="act-col-title">🏆 Awards & Fellowships</div>
+          {% for a in site.data.awards %}
+          <div class="award-item">
+            <div class="award-year">{{ a.year }}</div>
+            <div class="award-title">{{ a.title }}</div>
+            <div class="award-body">{{ a.body }}</div>
+            <div class="award-desc">{{ a.desc }}</div>
+          </div>{% endfor %}
+          <div class="act-col-title" style="margin-top:1.4rem;">📚 Teaching & Mentoring</div>
+          {% for t in site.data.teaching.teaching %}{% unless t.semester == "Semester, Year" %}
+          <div class="teach-item">
+            <div class="teach-meta">{{ t.semester }} · {{ t.institute }}</div>
+            <div class="teach-course">{{ t.course }}</div>
+            <div class="teach-role">{{ t.role }}</div>
+            <ul class="teach-duties">{% for d in t.duties %}<li>{{ d }}</li>{% endfor %}</ul>
+          </div>{% endunless %}{% endfor %}
+          {% for m in site.data.teaching.mentoring %}
+          <div class="teach-item">
+            <div class="teach-meta">{{ m.year }}</div>
+            <div class="teach-course">{{ m.role }}</div>
+            <div class="award-desc">{{ m.desc }}</div>
+          </div>{% endfor %}
+        </div>
+        <div class="act-col">
+          <div class="act-col-title">📝 Peer Reviewing</div>
+          <ul class="review-list">{% for v in site.data.professional.reviewing[0].venues %}<li>{{ v }}</li>{% endfor %}</ul>
+          <div class="act-col-title" style="margin-top:1.4rem;">🌐 Professional Memberships</div>
+          <div class="tag-list">{% for m in site.data.professional.memberships %}<span class="act-tag">{{ m.body }} — {{ m.level }} ({{ m.since }})</span>{% endfor %}</div>
+          <div class="act-col-title" style="margin-top:1rem;">🎤 Conferences & Talks</div>
+          {% for c in site.data.professional.conferences_attended %}
+          <div class="conf-item"><span class="conf-year">{{ c.year }}</span><span class="conf-name">{{ c.name }}</span><span class="conf-role">{{ c.role }}</span></div>{% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="panel" id="panel-contact">
+    <div class="sec-label">Contact</div>
+    <div class="panel-inner">
+      <h2 class="panel-title">Get in Touch</h2>
+      <p class="panel-sub">Open to research collaborations & academic discussions</p>
+      <div class="title-rule"><div class="tr-line"></div><div class="tr-dot"></div></div>
+      <div class="contact-wrap">
+        <div>
+          <p class="contact-intro">I welcome conversations around <strong>cold-formed steel structures</strong>, experimental mechanics, seismic engineering, and research collaborations. Feel free to reach out at <a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a> — I typically respond within 48 hours.</p>
+          <div class="contact-cards">
+            <div class="cc"><span class="cc-icon">✉️</span><div><div class="cc-lbl">Email</div><div class="cc-val"><a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a></div></div></div>
+            <div class="cc"><span class="cc-icon">📞</span><div><div class="cc-lbl">Phone</div><div class="cc-val">{{ site.author.phone }}</div></div></div>
+            <div class="cc"><span class="cc-icon">🏛️</span><div><div class="cc-lbl">Institution</div><div class="cc-val">{{ site.author.department }}, {{ site.author.institution }}</div></div></div>
+            <div class="cc"><span class="cc-icon">🔬</span><div><div class="cc-lbl">Supervisor</div><div class="cc-val">{{ site.author.supervisor }}</div></div></div>
+            {% if site.author.orcid %}<div class="cc"><span class="cc-icon">🆔</span><div><div class="cc-lbl">ORCID</div><div class="cc-val"><a href="https://orcid.org/{{ site.author.orcid }}" target="_blank">{{ site.author.orcid }}</a></div></div></div>{% endif %}
+          </div>
+        </div>
+        <div>
+          <div class="loc-box">
+            <div class="loc-top"><div class="loc-pre">Located at</div><div class="loc-name">{{ site.author.institution }}</div><div class="loc-dept">{{ site.author.department }}</div></div>
+            <div class="loc-body">
+              <div class="loc-addr">Kandi, Sangareddy District<br/>Telangana, India — 502284<br/><br/>Supervisor: {{ site.author.supervisor }}</div>
+              <div class="loc-links"><a href="https://www.iith.ac.in" class="btn btn-navy" target="_blank">IITH Website</a><a href="{{ site.cv_file }}" class="btn btn-outline" target="_blank">Download CV</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const scroll=document.getElementById('hscroll'),dots=document.querySelectorAll('.dot'),
+navBtns=document.querySelectorAll('.nav-btn'),arrowL=document.getElementById('arrowLeft'),
+arrowR=document.getElementById('arrowRight'),panels=document.querySelectorAll('.panel');
+let current=0;
+function goTo(i){current=i;scroll.scrollTo({left:i*window.innerWidth,behavior:'smooth'});updateUI();}
+function navigate(d){goTo(Math.max(0,Math.min(panels.length-1,current+d)));}
+function updateUI(){
+  dots.forEach((d,i)=>d.classList.toggle('active',i===current));
+  navBtns.forEach((b,i)=>b.classList.toggle('active',i===current));
+  arrowL.classList.toggle('hidden',current===0);
+  arrowR.classList.toggle('hidden',current===panels.length-1);
+}
+scroll.addEventListener('scroll',()=>{const i=Math.round(scroll.scrollLeft/window.innerWidth);if(i!==current){current=i;updateUI();}});
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')navigate(1);if(e.key==='ArrowLeft')navigate(-1);});
+function switchTab(tab,btn){
+  document.querySelectorAll('.pub-section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.pub-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+tab).classList.add('active');btn.classList.add('active');
+}
+updateUI();
+</script>
+</body>
+</html>
