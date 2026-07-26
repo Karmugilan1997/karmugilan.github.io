@@ -14,7 +14,7 @@ baseurl:     ""
 author:
   name:       "Karmugilan Panchamoorthy"
   initials:   "KP"
-  photo:      "images/profile_kar_Image Jul 2026.JPG"       # ← your photo filename in images/ folder
+  photo:      "images/profile_kar_Image.png"       # ← your photo filename in images/ folder
   role:       "PhD Candidate – Structural Engineering"
   department: "Department of Civil Engineering"
   institution: "Indian Institute of Technology Hyderabad"
