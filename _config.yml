@@ -37,8 +37,6 @@ stats:
     label: "Journal Papers"
   - number: "1"
     label: "Conference Paper"
-  - number: "9.60"
-    label: "PhD CGPA"
   - number: "4+"
     label: "Years of Research"
 
