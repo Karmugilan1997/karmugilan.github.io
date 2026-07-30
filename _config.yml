@@ -1,10 +1,10 @@
 # ================================================================
-# _config.yml - EDIT YOUR DETAILS HERE
-# After any change: git add . && git commit -m "update" && git push
+# _config.yml — Edit your details here
+# git add . && git commit -m "update" && git push
 # ================================================================
 
 title: "Karmugilan Panchamoorthy"
-tagline: "Structural Engineering - Cold-Formed Steel - Experimental Mechanics"
+tagline: "Structural Engineering · Cold-Formed Steel · Experimental Mechanics"
 description: "PhD Candidate | Structural Engineering | IIT Hyderabad"
 url: "https://karmugilan1997.github.io"
 baseurl: ""
@@ -12,16 +12,18 @@ baseurl: ""
 author:
   name: "Karmugilan Panchamoorthy"
   initials: "KP"
-  photo: "images/Profile_kar_Image.png"
-  role: "PhD Candidate - Structural Engineering"
+  photo: "images/profile.JPG"
+  role: "PhD Candidate – Structural Engineering"
   department: "Department of Civil Engineering"
   institution: "Indian Institute of Technology Hyderabad"
-  location: "IIT Hyderabad, India - 502284"
+  location: "IIT Hyderabad, India – 502284"
   supervisor: "Prof. Mahendrakumar Madhavan"
-  cgpa: "9.75 / 10"
-  phone: "+91-xxxxxxxxxx"
+  cgpa: "9.60 / 10"
+  phone: "+91-8098336845"
   email: "ce21resch11010@iith.ac.in"
+  email_personal: "karmugilan06@gmail.com"
   orcid: "0009-0000-4948-1288"
+  scopus: "59640721300"
   linkedin: "https://www.linkedin.com/in/karmugilan-panchamoorthy"
   googlescholar: "https://scholar.google.com/citations?user=X2T3ayQAAAAJ&hl=en"
   github: "https://github.com/Karmugilan1997"
@@ -35,10 +37,10 @@ stats:
     label: "Journal Papers"
   - number: "1"
     label: "Conference Paper"
-  - number: "9.75"
+  - number: "9.60"
     label: "PhD CGPA"
   - number: "4+"
-    label: "Years Research"
+    label: "Years of Research"
 
 markdown: kramdown
 theme: minima
