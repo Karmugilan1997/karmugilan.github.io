@@ -3,11 +3,12 @@
 # ================================================================
 
 - year: "Aug 2021 — Present"
-  role: "PhD Candidate — Structural Engineering"
+  role: "Doctor of Philosophy (PhD) — Structural Engineering"
   place: "Indian Institute of Technology Hyderabad (IIT Hyderabad), India"
-  cgpa: "9.75 / 10"
+  cgpa: "9.60 / 10"
   current: true
   points:
+    - "Thesis: Behaviour of Cold-Formed Steel Lateral Load-Resisting Systems under In-Plane Shear Loading"
     - "Supervisor: Prof. Mahendrakumar Madhavan, Dept. of Civil Engineering"
     - "Large-scale quasi-static cyclic experiments on plywood-sheathed CFS shear wall systems"
     - "Full-field strain measurement using 3D Digital Image Correlation (DIC)"
@@ -15,17 +16,17 @@
     - "3 Q1 journal papers + 1 international conference paper"
 
 - year: "2019 — 2021"
-  role: "M.E. — Structural Engineering"
+  role: "Master of Engineering (M.E.) — Structural Engineering"
   place: "ACGCET, Karaikudi, Tamil Nadu (Anna University), India"
-  cgpa: "9.71 / 10"
+  cgpa: "9.70 / 10"
   current: false
   points:
-    - "Graduated with distinction"
+    - "First Class with Distinction"
 
 - year: "2015 — 2019"
-  role: "B.E. — Civil Engineering"
+  role: "Bachelor of Engineering (B.E.) — Civil Engineering"
   place: "Government College of Engineering, Thanjavur (Anna University), India"
   cgpa: "8.44 / 10"
   current: false
   points:
-    - "First Class with Distinction"
+    - "First Class"
