@@ -127,10 +127,10 @@ layout: null
 
     /* Stats */
     .stat-row{display:inline-flex;margin-bottom:1.5rem;border:1px solid var(--border);}
-    .stat-box{text-align:center;padding:0.85rem 1.4rem;min-width:90px;border-right:1px solid var(--border);}
+    .stat-box{text-align:center;padding:0.9rem 1.8rem;min-width:110px;border-right:1px solid var(--border);}
     .stat-box:last-child{border-right:none;}
-    .stat-n{font-family:'DM Sans',sans-serif;font-size:2.2rem;font-weight:700;color:var(--navy);display:block;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-0.02em;}
-    .stat-l{font-family:'DM Sans',sans-serif;font-size:0.6rem;color:var(--muted2);margin-top:0.22rem;text-transform:none;}
+    .stat-n{font-family:'Times New Roman',Times,Georgia,serif;font-size:2.6rem;font-weight:700;color:var(--navy);display:block;line-height:1;letter-spacing:0.01em;}
+    .stat-l{font-family:'DM Sans',sans-serif;font-size:0.74rem;color:var(--muted);margin-top:0.28rem;font-weight:500;}
 
     /* Buttons */
     .cta-row{display:flex;gap:0.55rem;flex-wrap:wrap;margin-bottom:1.1rem;}
@@ -205,7 +205,7 @@ layout: null
     /* ═══ PUBLICATIONS ═══ */
     #panel-publications{background:var(--bg);}
     .pub-tabs{display:flex;margin-bottom:1.8rem;border-bottom:1px solid var(--border);}
-    .pub-tab{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1rem;color:var(--muted);background:none;border:none;cursor:pointer;padding:0.6rem 1.4rem;position:relative;transition:color 0.2s;}
+    .pub-tab{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1rem;color:var(--muted);background:none;border:none;cursor:pointer;padding:0.6rem 1.4rem;position:relative;transition:color 0.2s;font-feature-settings:'lnum';}
     .pub-tab::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:2px;background:var(--teal);transform:scaleX(0);transition:transform 0.3s;}
     .pub-tab.active{color:var(--navy);}
     .pub-tab.active::after{transform:scaleX(1);}
@@ -214,7 +214,7 @@ layout: null
     .pub-card{padding:1.4rem 1.8rem;background:var(--card);border:1px solid var(--border);border-left:3px solid var(--navy);transition:all 0.25s;}
     .pub-card:hover{border-left-color:var(--teal);background:var(--teal-l);}
     .pub-top{display:flex;align-items:center;gap:0.7rem;flex-wrap:wrap;margin-bottom:0.55rem;}
-    .pub-yr{font-family:'DM Sans',sans-serif;font-size:1.05rem;font-weight:700;color:var(--navy);font-variant-numeric:tabular-nums;}
+    .pub-yr{font-family:'Times New Roman',Times,Georgia,serif;font-size:1.2rem;font-weight:700;color:var(--navy);}
     .pub-badge{font-family:'DM Sans',sans-serif;font-size:0.58rem;padding:0.1rem 0.55rem;background:var(--navy-l);color:var(--navy);border:1px solid rgba(28,51,85,0.2);font-weight:500;}
     .pub-v{font-size:0.82rem;color:var(--muted);font-style:italic;}
     .pub-title{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;color:var(--ink);line-height:1.48;margin-bottom:0.3rem;}
@@ -253,7 +253,7 @@ layout: null
     .tl-item{position:relative;margin-bottom:2.5rem;}
     .tl-dot{position:absolute;left:-2.55rem;top:0.42rem;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--border2);}
     .tl-dot.active{border-color:var(--teal);background:var(--teal);box-shadow:0 0 0 4px rgba(26,92,74,0.12);}
-    .tl-year{font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--teal);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;}
+    .tl-year{font-family:'Times New Roman',Times,Georgia,serif;font-size:0.88rem;font-weight:700;color:var(--teal);margin-bottom:0.3rem;font-style:italic;}
     .tl-role{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--ink);margin-bottom:0.12rem;}
     .tl-place{font-size:0.86rem;color:var(--muted);margin-bottom:0.35rem;}
     /* CGPA — plain text, no box */
@@ -278,7 +278,7 @@ layout: null
     /* Award items */
     .award-item{padding:0.9rem 0;border-bottom:1px solid var(--border);}
     .award-item:last-child{border-bottom:none;padding-bottom:0;}
-    .award-year{font-family:'DM Mono',monospace;font-size:0.55rem;color:var(--teal);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.18rem;}
+    .award-year{font-family:'Times New Roman',Times,Georgia,serif;font-size:0.85rem;font-weight:700;color:var(--teal);margin-bottom:0.18rem;font-style:italic;}
     .award-title{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:0.1rem;}
     .award-body{font-size:0.8rem;color:var(--muted);font-style:italic;margin-bottom:0.18rem;}
     .award-desc{font-size:0.8rem;color:var(--muted);}
@@ -318,7 +318,7 @@ layout: null
       padding:0.48rem 0;border-bottom:1px dotted var(--border);
     }
     .conf-item:last-child{border-bottom:none;}
-    .conf-year{font-family:'DM Mono',monospace;font-size:0.56rem;color:var(--teal);flex-shrink:0;margin-top:0.12rem;letter-spacing:0.05em;}
+    .conf-year{font-family:'Times New Roman',Times,Georgia,serif;font-size:0.88rem;font-weight:700;color:var(--teal);flex-shrink:0;margin-top:0.04rem;font-style:italic;}
     .conf-name{font-size:0.82rem;color:var(--body);line-height:1.5;flex:1;}
     .conf-badge{font-family:'DM Sans',sans-serif;font-size:0.56rem;color:var(--white);background:var(--teal);padding:0.1rem 0.5rem;flex-shrink:0;margin-top:0.14rem;font-weight:500;}
 
