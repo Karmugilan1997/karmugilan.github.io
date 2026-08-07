@@ -479,7 +479,7 @@ layout: null
           <div class="card-row"><span class="cr-icon">🎓</span><div><div class="cr-lbl">PhD CGPA</div><div class="cr-val">{{ site.author.cgpa }}</div></div></div>
           <div class="card-row"><span class="cr-icon">📍</span><div><div class="cr-lbl">Location</div><div class="cr-val">{{ site.author.location }}</div></div></div>
           {% if site.author.orcid %}<div class="card-row"><span class="cr-icon">🆔</span><div><div class="cr-lbl">ORCID</div><div class="cr-val"><a href="https://orcid.org/{{ site.author.orcid }}" target="_blank">{{ site.author.orcid }}</a></div></div></div>{% endif %}
-          {% if site.author.scopus %}<div class="card-row"><span class="cr-icon">📊</span><div><div class="cr-lbl">Scopus ID</div><div class="cr-val">{{ site.author.scopus }}</div></div></div>{% endif %}
+          {% if site.author.scopus %}<div class="card-row"><span class="cr-icon">📊</span><div><div class="cr-lbl">Scopus ID</div><div class="cr-val"><a href="https://www.scopus.com/authid/detail.uri?authorId={{ site.author.scopus }}" target="_blank">{{ site.author.scopus }}</a></div></div></div>{% endif %}
           <div class="card-row"><span class="cr-icon">✉️</span><div><div class="cr-lbl">Email</div><div class="cr-val"><a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a></div></div></div>
         </div>
         <div class="card-socials">
@@ -661,7 +661,7 @@ layout: null
             <div class="cc"><span class="cc-icon">🏛️</span><div><div class="cc-lbl">Institution</div><div class="cc-val">{{ site.author.department }}, {{ site.author.institution }}</div></div></div>
             <div class="cc"><span class="cc-icon">🔬</span><div><div class="cc-lbl">Supervisor</div><div class="cc-val">{{ site.author.supervisor }}</div></div></div>
             {% if site.author.orcid %}<div class="cc"><span class="cc-icon">🆔</span><div><div class="cc-lbl">ORCID</div><div class="cc-val"><a href="https://orcid.org/{{ site.author.orcid }}" target="_blank">{{ site.author.orcid }}</a></div></div></div>{% endif %}
-            {% if site.author.scopus %}<div class="cc"><span class="cc-icon">📊</span><div><div class="cc-lbl">Scopus ID</div><div class="cc-val">{{ site.author.scopus }}</div></div></div>{% endif %}
+            {% if site.author.scopus %}<div class="cc"><span class="cc-icon">📊</span><div><div class="cc-lbl">Scopus ID</div><div class="cc-val"><a href="https://www.scopus.com/authid/detail.uri?authorId={{ site.author.scopus }}" target="_blank">{{ site.author.scopus }}</a></div></div></div>{% endif %}
           </div>
         </div>
         <div>
