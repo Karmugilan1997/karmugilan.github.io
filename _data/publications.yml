@@ -9,8 +9,8 @@ journals:
     venue: "Journal of Structural Engineering (ASCE)"
     title: "In-Plane Seismic Performance of Double-Sided Steel-Sheathed Cold-Formed Steel Shear Walls: Experimental Evaluation and Design Implications"
     authors: "<strong>Panchamoorthy, K. S.</strong> and Madhavan, M. M."
-    doi_url: "https://doi.org/10.1061/JSENDH/STENG-15872"
-    doi_label: "10.1061/JSENDH/STENG-15872"
+    doi_url: "https://doi.org/10.1061/JSENDH.STENG-15872"
+    doi_label: "10.1061/JSENDH.STENG-15872"
 
   - year: "2026"
     badge: "Q1 · Elsevier"
